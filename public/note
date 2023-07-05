@@ -1,0 +1,28 @@
+Elediklerim
+
+1) Kullanici oz yorumun gorende "me" kimi bir sey yazilsin
+Bidene api yazassan currentUserId ni qaytarsin fronta yoxluyacagki siyahidan gelen idlernen hansi currentnen eynidi onalrin qabagina "me" yazacag
+
+2) Eger cardin statusu gozlemede ise carda basa bilsin ama yorum hissesi gorsenmesin. Ve backende de yoxla status ICRA_EDILIB deyilse yorum elave elemek istese error atsin.
+
+3) Birden cox sekil elave elemeyi ele
+
+4) Card yaradanda mandatory meselesin ele
+
+5) Mesaja yanit vermeyi duzelt
+
+6) reply ucun tarix ve yanit verenin adin falanda qoy
+
+7) Commenti dizayn ele
+
+8) Yanitlari gosterde youtebedeki kimi "sayi" larini goster
+
+9) Yoruma reply edende count da deyissin
+
+10) Login, Register page de errorlar duzgun cixmir.
+
+11) Loginde error cixanda daire donmeye davam eliyir.
+
+12) Yorumlara Pagination qoy.
+
+13) 

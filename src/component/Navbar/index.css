@@ -1,0 +1,55 @@
+.nav-bar-container-light {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 15px;
+    background-color: white;
+    border-bottom: 2px solid #dcdcdc;
+    height: 60px;
+}
+
+.middle-items {
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    padding: 0;
+}
+
+.list-item {
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.link-light {
+    color: #171f46;
+    text-decoration: none;
+}
+
+.theme-button {
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border-style: none;
+    outline: none;
+}
+
+.theme-img {
+    width: 40px;
+    height: 40px;
+}
+
+.username-container {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    margin-top: -11px;
+}
+
+
+.username {
+    font-weight: bold;
+    font-size: 17px;
+    margin-right: 10px;
+}

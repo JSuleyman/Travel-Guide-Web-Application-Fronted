@@ -1,0 +1,35 @@
+.dropdown-menu .dropdown-item {
+    display: block;
+}
+
+.profile-icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
+
+.profile-icon {
+    font-size: 24px;
+}
+
+.dropdown-item-text {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#profile-dropdown {
+    position: relative;
+}
+
+#profile-dropdown::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -10px;
+    transform: translateY(-50%);
+    border-style: solid;
+    border-width: 6px 6px 0 6px;
+    border-color: #fff transparent transparent transparent;
+}

@@ -1,0 +1,152 @@
+.reply-toggle-button {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.reply-toggle-button.open .arrow-icon {
+    transform: rotate(0deg);
+}
+
+.arrow-icon {
+    font-size: 20px;
+    margin-left: 5px;
+    transition: transform 0.3s ease-in-out;
+    /* Yön değişimi için geçiş efekti ekledik */
+}
+
+.arrow-icon.open {
+    transform: rotate(180deg);
+    /* Yönü değişecek şekilde dönüşüm tanımladık */
+}
+
+.replies-list {
+    margin-top: 10px;
+}
+
+.reply {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #cacacd76;
+}
+
+.reply-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.comment-date {
+    margin-left: 10px;
+    color: gray;
+}
+
+.reply-body {
+    margin: 0;
+}
+
+
+
+/* ...daha fazla stil kuralları... */
+
+
+
+
+
+/* .replies-container {
+    margin-top: 10px;
+  }
+  
+  .reply-toggle-button {
+    background-color: transparent;
+    border: none;
+    color: #0366d6;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .reply-toggle-button:hover {
+    text-decoration: underline;
+  }
+  
+  .replies-list {
+    margin-top: 10px;
+  }
+  
+  .reply {
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+  
+  .reply-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .reply-header strong {
+    font-weight: bold;
+    margin-right: 5px;
+  }
+  
+  .comment-date {
+    color: #888;
+    font-size: 12px;
+  }
+  
+  .reply-body {
+    margin-top: 5px;
+  }
+  
+  /* Style for nested replies */
+
+
+
+/* .replies-container {
+    margin-top: 10px;
+  }
+  
+  .reply-toggle-button {
+    background: none;
+    border: none;
+    color: #333;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 5px;
+    text-decoration: underline;
+  }
+  
+  .replies-list {
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+  
+  .reply {
+    margin-bottom: 10px;
+  }
+  
+  .reply-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .reply-header strong {
+    margin-right: 5px;
+  }
+  
+  .reply-body {
+    color: #555;
+  }
+   */
