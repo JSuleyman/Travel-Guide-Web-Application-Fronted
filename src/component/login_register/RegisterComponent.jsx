@@ -64,7 +64,7 @@ const RegisterComponent = ({ setAuth }) => {
                     password: values.password,
                 })
                 .then((response) => {
-                    // toastr.success('Register successful!');
+                    // toastr.success('Register sucscessful!');
                     navigate("/");
                 })
                 .catch((error) => {
