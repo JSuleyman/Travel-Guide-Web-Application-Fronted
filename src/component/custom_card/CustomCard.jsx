@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import makeApiRequest from '../../api/makeApiRequest';
+import makeApiRequest from '../../api_request/makeApiRequest';
 import ImageGallery from '../../img/ImageGallery';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

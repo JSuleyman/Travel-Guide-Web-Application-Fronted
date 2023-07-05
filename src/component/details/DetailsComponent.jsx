@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import './DetailsComponent.css';
-import makeApiRequest from '../../api/makeApiRequest';
+import makeApiRequest from '../../api_request/makeApiRequest';
 import Replies from './Replies';
 
 const DetailsComponent = () => {

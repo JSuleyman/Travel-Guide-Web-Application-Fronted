@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import makeApiRequest from '../../api/makeApiRequest';
+import makeApiRequest from '../../api_request/makeApiRequest';
 import './Replies.css';
 import { faArrowAltCircleDown, faArrowAltCircleUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
