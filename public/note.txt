@@ -25,4 +25,4 @@ Bidene api yazassan currentUserId ni qaytarsin fronta yoxluyacagki siyahidan gel
 
 12) Yorumlara Pagination qoy.
 
-13) asda
+13)
