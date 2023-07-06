@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import './DetailsComponent.css';
-import makeApiRequest from '../../api_request/makeApiRequest';
+import makeApiRequest from '../../api/makeApiRequest';
 import Replies from './Replies';
 
 const DetailsComponent = () => {
@@ -25,7 +25,7 @@ const DetailsComponent = () => {
   useEffect(() => {
     const placesId = id;
 
-    makeApiRequest(`http://localhost:8082/places_visit_details?placesId=${placesId}`, 'GET')
+    makeApiRequest(`https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/places_visit_details?placesId=${placesId}`, 'GET')
       .then(response => {
         console.log('API isteği tamamlandı:', response.data);
         if (response.data.status === 'COMPLETED') {
@@ -49,7 +49,7 @@ const DetailsComponent = () => {
       userComment: userinYazdigiYorum
     };
 
-    makeApiRequest('http://localhost:8082/user_comment', 'POST', payload)
+    makeApiRequest('https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/user_comment', 'POST', payload)
       .then(response => {
         console.log('Yorum gönderildi:', response.data);
         setuserinYazdigiYorum('');
@@ -66,7 +66,7 @@ const DetailsComponent = () => {
       replyMessage: replyMessage
     };
 
-    makeApiRequest('http://localhost:8082/user_comment_reply', 'POST', payload)
+    makeApiRequest('https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/user_comment_reply', 'POST', payload)
       .then(response => {
         console.log('Reply submitted:', response.data);
         setReplyCommentId(null);
@@ -79,7 +79,7 @@ const DetailsComponent = () => {
   };
 
   const userCommentsList = () => {
-    const url = `http://localhost:8082/user_comment/details_id?fkPlacesId=${id}`;
+    const url = `https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/user_comment/details_id?fkPlacesId=${id}`;
 
     makeApiRequest(url, 'GET')
       .then(response => {
@@ -102,7 +102,7 @@ const DetailsComponent = () => {
   };
 
   const fetchCurrentUserId = () => {
-    const url = 'http://localhost:8082/user_comment/current_user_id';
+    const url = 'https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/user_comment/current_user_id';
 
     makeApiRequest(url, 'GET')
       .then(response => {
@@ -167,7 +167,7 @@ const DetailsComponent = () => {
       <div className="details-image">
         {imageUrls.length > 0 && (
           <img
-            src={`http://localhost:8082/image/${id}/${imageUrls[selectedImageIndex]}`}
+            src={`https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/image/${id}/${imageUrls[selectedImageIndex]}`}
             alt="Resim"
             className="image-preview"
           />
@@ -284,7 +284,7 @@ export default DetailsComponent;
 //   useEffect(() => {
 //     const placesId = id;
 
-//     makeApiRequest(`http://localhost:8082/places_visit_details?placesId=${placesId}`, 'GET')
+//     makeApiRequest(`https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/places_visit_details?placesId=${placesId}`, 'GET')
 //       .then(response => {
 //         console.log('API isteği tamamlandı:', response.data);
 //         if (response.data.status === 'COMPLETED') {
@@ -307,7 +307,7 @@ export default DetailsComponent;
 //       userComment: userinYazdigiYorum
 //     };
 
-//     makeApiRequest('http://localhost:8082/user_comment', 'POST', payload)
+//     makeApiRequest('https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/user_comment', 'POST', payload)
 //       .then(response => {
 //         console.log('Yorum gönderildi:', response.data);
 //         setuserinYazdigiYorum('');
@@ -324,7 +324,7 @@ export default DetailsComponent;
 //       replyMessage: replyMessage
 //     };
 
-//     makeApiRequest('http://localhost:8082/user_comment_reply', 'POST', payload)
+//     makeApiRequest('https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/user_comment_reply', 'POST', payload)
 //       .then(response => {
 //         console.log('Reply submitted:', response.data);
 //         setReplyCommentId(null);
@@ -336,7 +336,7 @@ export default DetailsComponent;
 //   };
 
 //   const userCommentsList = () => {
-//     const url = `http://localhost:8082/user_comment/details_id?fkPlacesId=${id}`;
+//     const url = `https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/user_comment/details_id?fkPlacesId=${id}`;
 
 //     makeApiRequest(url, 'GET')
 //       .then(response => {
@@ -359,7 +359,7 @@ export default DetailsComponent;
 //   };
 
 //   const fetchCurrentUserId = () => {
-//     const url = 'http://localhost:8082/user_comment/current_user_id';
+//     const url = 'https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/user_comment/current_user_id';
 
 //     makeApiRequest(url, 'GET')
 //       .then(response => {
@@ -410,7 +410,7 @@ export default DetailsComponent;
 //       <div className="details-image">
 //         {imageUrls.length > 0 && (
 //           <img
-//             src={`http://localhost:8082/image/${id}/${imageUrls[selectedImageIndex]}`}
+//             src={`https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/image/${id}/${imageUrls[selectedImageIndex]}`}
 //             alt="Resim"
 //             className="image-preview"
 //           />

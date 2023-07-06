@@ -47,7 +47,7 @@ const LoginForm = ({ onLogin }) => {
     const onSubmit = (values) => {
         console.log("submitting...");
         axios
-            .post("http://localhost:8082/api/v1/auth/authenticate", {
+            .post("https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/api/v1/auth/authenticate", {
                 email: values.email,
                 password: values.password,
             })
@@ -252,7 +252,7 @@ export default LoginForm;
 //         onSubmit: (values) => {
 //             console.log("submitting...");
 //             axios
-//                 .post("http://localhost:8082/api/v1/auth/authenticate", {
+//                 .post("https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/api/v1/auth/authenticate", {
 //                     email: values.email,
 //                     password: values.password,
 //                 })

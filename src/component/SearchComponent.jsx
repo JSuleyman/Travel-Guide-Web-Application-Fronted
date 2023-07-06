@@ -16,7 +16,7 @@ const SearchComponent = () => {
             const token = localStorage.getItem("token");
 
             // HTTP GET isteği yap
-            fetch(`http://localhost:8082/places_visit/get?key=${selectedOption}`, {
+            fetch(`https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/places_visit/get?key=${selectedOption}`, {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }
@@ -28,7 +28,7 @@ const SearchComponent = () => {
                     data.forEach(row => {
                         const cityName = row.destination;
                         const money = row.estimatedCost;
-                        const imageURL = "http://localhost:8082/image/" + row.id + "/" + row.imageUrl;
+                        const imageURL = "https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/image/" + row.id + "/" + row.imageUrl;
                         console.log(imageURL); // Resim URL'sini al
                         const likeCount = row.likeCount;
                         const creadetBy = row.createdByName ? row.createdByName : '';
@@ -125,7 +125,7 @@ const SearchComponent = () => {
     useEffect(() => {
         $.ajax({
             type: "GET",
-            url: "http://localhost:8082/tavel_place/getAll",
+            url: "https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/tavel_place/getAll",
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token")
             },
@@ -163,7 +163,7 @@ const SearchComponent = () => {
         // Favori durumunu kontrol etmek için backend API'yi çağır
         const token = localStorage.getItem("token");
 
-        fetch(`http://localhost:8082/star/favorites/check/${rowId}`, {
+        fetch(`https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/star/favorites/check/${rowId}`, {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
@@ -184,7 +184,7 @@ const SearchComponent = () => {
         // Favori ekleme API isteği yap
         const token = localStorage.getItem("token");
 
-        fetch("http://localhost:8082/star/favorites/add", {
+        fetch("https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/star/favorites/add", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -206,7 +206,7 @@ const SearchComponent = () => {
         // Favori silme API isteği yap
         const token = localStorage.getItem("token");
 
-        fetch("http://localhost:8082/star/favorites/delete", {
+        fetch("https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/star/favorites/delete", {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -228,7 +228,7 @@ const SearchComponent = () => {
         // Favori durumunu kontrol etmek için backend API'yi çağır
         const token = localStorage.getItem("token");
 
-        fetch(`http://localhost:8082/like_btn/check/${rowId}`, {
+        fetch(`https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/like_btn/check/${rowId}`, {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
@@ -249,7 +249,7 @@ const SearchComponent = () => {
         // Like ekleme API isteği yap
         const token = localStorage.getItem("token");
 
-        fetch("http://localhost:8082/like_btn/add", {
+        fetch("https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/like_btn/add", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -276,7 +276,7 @@ const SearchComponent = () => {
         // Delete silme API isteği yap
         const token = localStorage.getItem("token");
 
-        fetch("http://localhost:8082/like_btn/delete", {
+        fetch("https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/like_btn/delete", {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",

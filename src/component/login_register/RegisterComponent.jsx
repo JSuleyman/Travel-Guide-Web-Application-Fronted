@@ -57,7 +57,7 @@ const RegisterComponent = ({ setAuth }) => {
         onSubmit: (values) => {
             console.log("submitting...");
             axios
-                .post("http://localhost:8082/api/v1/auth/register", {
+                .post("https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/api/v1/auth/register", {
                     firstname: values.firstName,
                     lastname: values.lastName,
                     email: values.email,

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import makeApiRequest from '../../api_request/makeApiRequest';
+import makeApiRequest from '../../api/makeApiRequest';
 import './Replies.css';
 import { faArrowAltCircleDown, faArrowAltCircleUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -26,7 +26,7 @@ const Replies = ({ commentId, newReplyComment }) => {
     }, [commentId, offset, limit]);
 
     const fetchReplyCount = (commentId) => {
-        const url = `http://localhost:8082/user_comment_reply/count/${commentId}`;
+        const url = `https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/user_comment_reply/count/${commentId}`;
 
         makeApiRequest(url, 'GET')
             .then(response => {
@@ -46,7 +46,7 @@ const Replies = ({ commentId, newReplyComment }) => {
     };
 
     const fetchReplyComments = (commentId, offset, limit) => {
-        const url = `http://localhost:8082/user_comment_reply/${commentId}?page=${offset}&size=${limit}`;
+        const url = `https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/user_comment_reply/${commentId}?page=${offset}&size=${limit}`;
 
         makeApiRequest(url, 'GET')
             .then(response => {
@@ -60,7 +60,7 @@ const Replies = ({ commentId, newReplyComment }) => {
     };
 
     const fetchCurrentUserId = () => {
-        const url = 'http://localhost:8082/user_comment/current_user_id';
+        const url = 'https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/user_comment/current_user_id';
 
         makeApiRequest(url, 'GET')
             .then(response => {
@@ -156,7 +156,7 @@ export default Replies;
 
 
 //     const fetchReplyCount = (commentId) => {
-//         const url = `http://localhost:8082/user_comment_reply/count/${commentId}`;
+//         const url = `https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/user_comment_reply/count/${commentId}`;
 
 //         makeApiRequest(url, 'GET')
 //             .then(response => {
@@ -176,7 +176,7 @@ export default Replies;
 //     };
 
 //     const fetchReplyComments = (commentId) => {
-//         const url = `http://localhost:8082/user_comment_reply/${commentId}`;
+//         const url = `https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/user_comment_reply/${commentId}`;
 
 //         makeApiRequest(url, 'GET')
 //             .then(response => {
@@ -190,7 +190,7 @@ export default Replies;
 //     };
 
 //     const fetchCurrentUserId = () => {
-//         const url = 'http://localhost:8082/user_comment/current_user_id';
+//         const url = 'https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/user_comment/current_user_id';
 
 //         makeApiRequest(url, 'GET')
 //             .then(response => {
@@ -268,7 +268,7 @@ export default Replies;
 //     };
 
 //     const fetchReplyComments = (commentId) => {
-//         const url = `http://localhost:8082/user_comment_reply/${commentId}`;
+//         const url = `https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/user_comment_reply/${commentId}`;
 
 //         makeApiRequest(url, 'GET')
 //             .then(response => {
@@ -282,7 +282,7 @@ export default Replies;
 //     };
 
 //     const fetchCurrentUserId = () => {
-//         const url = 'http://localhost:8082/user_comment/current_user_id';
+//         const url = 'https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/user_comment/current_user_id';
 
 //         makeApiRequest(url, 'GET')
 //             .then(response => {

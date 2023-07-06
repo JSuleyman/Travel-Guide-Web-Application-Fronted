@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import makeApiRequest from '../../api_request/makeApiRequest';
+import makeApiRequest from '../../api/makeApiRequest';
 import ImageGallery from '../../img/ImageGallery';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -14,7 +14,7 @@ const CustomCard = () => {
     const [events, setEvents] = useState('');
     const [keyOptions, setKeyOptions] = useState([]);
 
-    const apiUrl = 'http://localhost:8082/tavel_place/getAll';
+    const apiUrl = 'https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/tavel_place/getAll';
 
     useEffect(() => {
         async function fetchKeyOptions() {
@@ -43,7 +43,7 @@ const CustomCard = () => {
         e.preventDefault();
 
         makeApiRequest(
-            'http://localhost:8082/places_visit',
+            'https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/places_visit',
             'POST',
             {
                 categoryId,
@@ -65,14 +65,14 @@ const CustomCard = () => {
 
                 const token = localStorage.getItem('token');
 
-                axios.post(`http://localhost:8082/image/${fkPlacesToVisitId}`, formData, {
+                axios.post(`https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/image/${fkPlacesToVisitId}`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         'Authorization': `Bearer ${token}`
                     }
                 })
                     .catch(error => {
-                        makeApiRequest(`http://localhost:8082/places_visit/delete/${fkPlacesToVisitId}`, 'DELETE')
+                        makeApiRequest(`https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/places_visit/delete/${fkPlacesToVisitId}`, 'DELETE')
                     });
                 setCategoryId('');
                 setDestinationName('');

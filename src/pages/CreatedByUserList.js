@@ -16,7 +16,7 @@ const CreatedByUserList = () => {
 
     useEffect(() => {
         fetchData(filter);
-        makeApiRequest('http://localhost:8082/places_visit/created_by_user_list_count', 'GET')
+        makeApiRequest('https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/places_visit/created_by_user_list_count', 'GET')
             .then(response => {
                 console.log('API isteği tamamlandı:', response.data);
                 setPendingCount(response.data.pendingCount == 0 ? 0 : response.data.pendingCount);
@@ -34,7 +34,7 @@ const CreatedByUserList = () => {
         const filterParams = status ? `?status=${status}` : '';
 
         console.log('API isteği yapılıyor...');
-        makeApiRequest(`http://localhost:8082/places_visit/created_by_user_list${filterParams}`, 'GET')
+        makeApiRequest(`https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/places_visit/created_by_user_list${filterParams}`, 'GET')
             .then(response => {
                 console.log('API isteği tamamlandı:', response.data);
                 setFavorites(response.data);
@@ -107,7 +107,7 @@ const CreatedByUserList = () => {
                             onClick={() => handleCardClick(row.destinationName, row.id)}
                         >
                             <div className="result-image">
-                                <img src={`http://localhost:8082/image/${row.id}/${row.imageUrl}`} alt={row.destinationName} />
+                                <img src={`https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/image/${row.id}/${row.imageUrl}`} alt={row.destinationName} />
                             </div>
                             <div className="result-details">
                                 <h5 className="result-city">
@@ -146,7 +146,7 @@ export default CreatedByUserList;
 //     }, []);
 
 //     const fetchFavorites = (token) => {
-//         fetch("http://localhost:8082/places_visit/created_by_user_list", {
+//         fetch("https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/places_visit/created_by_user_list", {
 //             method: "GET",
 //             headers: {
 //                 "Content-Type": "application/json",
@@ -241,7 +241,7 @@ export default CreatedByUserList;
 //     }, []);
 
 //     const fetchFavorites = (token) => {
-//         fetch("http://localhost:8082/places_visit/created_by_user_list", {
+//         fetch("https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/places_visit/created_by_user_list", {
 //             method: "GET",
 //             headers: {
 //                 "Content-Type": "application/json",

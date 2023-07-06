@@ -15,7 +15,7 @@ const FavoritesComponent = () => {
     }, []);
 
     const fetchFavorites = (token) => {
-        fetch("http://localhost:8082/star/getAll", {
+        fetch("https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/star/getAll", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -46,7 +46,7 @@ const FavoritesComponent = () => {
     };
 
     const addFavorite = (token, rowId) => {
-        fetch("http://localhost:8082/star/favorites/add", {
+        fetch("https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/star/favorites/add", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -65,7 +65,7 @@ const FavoritesComponent = () => {
     };
 
     const deleteFavorite = (token, rowId) => {
-        fetch("http://localhost:8082/star/favorites/delete", {
+        fetch("https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/star/favorites/delete", {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",

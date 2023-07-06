@@ -9,7 +9,7 @@ const ProfileDropdown = ({ onLogout }) => {
 
   const handleLogout = () => {
 
-    makeApiRequest('http://localhost:8082/api/v1/auth/logout', 'POST')
+    makeApiRequest('https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/api/v1/auth/logout', 'POST')
       .then(response => {
         localStorage.removeItem("token");
         localStorage.removeItem("firstName");

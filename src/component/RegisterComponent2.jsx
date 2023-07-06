@@ -13,7 +13,7 @@ const RegisterComponent2 = () => {
         event.preventDefault();
 
         // Send the data to the backend
-        fetch('http://localhost:8082/api/v1/auth/register', {
+        fetch('https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/api/v1/auth/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
