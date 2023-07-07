@@ -34,8 +34,8 @@
     "yup": "^1.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "predeploy":"nmp run build",
+    "start": "set PORT=3006 && react-scripts start",
+    "predeploy":"npm run build",
     "deploy":"gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -58,10 +58,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "engines": {
-    "node": "v18.12.1",
-    "npm": "8.19.2"
   },
   "devDependencies": {
     "gh-pages": "^5.0.0"
