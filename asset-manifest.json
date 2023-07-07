@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Travel-Guide-Web-Application-Fronted/static/css/main.831a395c.css",
-    "main.js": "/Travel-Guide-Web-Application-Fronted/static/js/main.94da3658.js",
-    "static/js/787.26f8ebce.chunk.js": "/Travel-Guide-Web-Application-Fronted/static/js/787.26f8ebce.chunk.js",
-    "index.html": "/Travel-Guide-Web-Application-Fronted/index.html",
-    "main.831a395c.css.map": "/Travel-Guide-Web-Application-Fronted/static/css/main.831a395c.css.map",
-    "main.94da3658.js.map": "/Travel-Guide-Web-Application-Fronted/static/js/main.94da3658.js.map",
-    "787.26f8ebce.chunk.js.map": "/Travel-Guide-Web-Application-Fronted/static/js/787.26f8ebce.chunk.js.map"
+    "main.css": "./static/css/main.831a395c.css",
+    "main.js": "./static/js/main.70a28792.js",
+    "static/js/787.26f8ebce.chunk.js": "./static/js/787.26f8ebce.chunk.js",
+    "index.html": "./index.html",
+    "main.831a395c.css.map": "./static/css/main.831a395c.css.map",
+    "main.70a28792.js.map": "./static/js/main.70a28792.js.map",
+    "787.26f8ebce.chunk.js.map": "./static/js/787.26f8ebce.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.831a395c.css",
-    "static/js/main.94da3658.js"
+    "static/js/main.70a28792.js"
   ]
 }
