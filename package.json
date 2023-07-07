@@ -1,7 +1,6 @@
 {
   "name": "react-proje",
   "version": "0.1.0",
-  "private": true,
   "dependencies": {
     "@emotion/styled": "^11.11.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
