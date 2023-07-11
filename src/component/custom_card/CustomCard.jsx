@@ -13,6 +13,7 @@ const CustomCard = () => {
     const [userComments, setUserComments] = useState('');
     const [events, setEvents] = useState('');
     const [keyOptions, setKeyOptions] = useState([]);
+    const [shouldResetImages, setShouldResetImages] = useState(false);
 
     const apiUrl = 'https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/tavel_place/getAll';
 
@@ -78,6 +79,7 @@ const CustomCard = () => {
                 setDestinationName('');
                 setEstimatedCost('');
                 setSelectedImage([]);
+                setShouldResetImages(true);
                 setUserComments('');
                 setEvents('');
             })
@@ -94,6 +96,12 @@ const CustomCard = () => {
                 }
             });
     };
+
+    useEffect(() => {
+        if (shouldResetImages) {
+          setShouldResetImages(false);
+        }
+      }, [shouldResetImages]);
 
     return (
         <div className="container">
@@ -137,7 +145,11 @@ const CustomCard = () => {
                     />
                 </div>
 
-                <ImageGallery onImageSelect={handleImageSelect} onDeleteImage={handleImageDelete} />
+                <ImageGallery 
+                onImageSelect={handleImageSelect} 
+                onDeleteImage={handleImageDelete} 
+                shouldResetImages={shouldResetImages}
+                />
 
                 <div className="form-group">
                     <label htmlFor="userComments">User Comments:</label>

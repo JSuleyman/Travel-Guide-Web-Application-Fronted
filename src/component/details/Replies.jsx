@@ -96,14 +96,18 @@ const Replies = ({ commentId, newReplyComment }) => {
     const handleLoadMore = () => {
         setLimit((prevOffset) => prevOffset + 1 * limit); // Offset'i güncelleyerek bir sonraki sayfayı getir
         // setOffset((prevOffset) => prevOffset + 1 * limit); // Offset'i güncelleyerek bir sonraki sayfayı getir
-      };
-      
+    };
+
 
     return (
         <div className="replies-container">
             <button className={`reply-toggle-button ${showReplies ? 'open' : ''}`} onClick={handleShowReplies}>
-                Yanıtları {showReplies ? 'Gizle' : 'Göster'} ({replyCount})
-                <FontAwesomeIcon icon={showReplies ? faArrowAltCircleUp : faArrowAltCircleDown} className="arrow-icon" />
+                {replyCount > 0 && (
+                    <>
+                        Yanıtları {showReplies ? 'Gizle' : 'Göster'} ({replyCount})
+                        <FontAwesomeIcon icon={showReplies ? faArrowAltCircleUp : faArrowAltCircleDown} className="arrow-icon" />
+                    </>
+                )}
             </button>
             {showReplies && (
                 <div className="replies-list">

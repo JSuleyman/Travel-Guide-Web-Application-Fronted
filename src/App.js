@@ -35,7 +35,7 @@ const App = () => {
 
   return (
     <div>
-      {loggedIn && <ProfileDropdown onLogout={handleLogout}/>}
+      {loggedIn && <ProfileDropdown onLogout={handleLogout} />}
       <Routes>
         <Route path="/" element={<Login onLogin={handleLogin} />} />
         <Route path="/search" element={<SearchComponent />} />

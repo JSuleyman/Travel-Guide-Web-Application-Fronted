@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import './index.css'
 import makeApiRequest from "../../api/makeApiRequest";
+import { useNavigate } from "react-router-dom";
 
 const ProfileDropdown = ({ onLogout }) => {
   const firstName = localStorage.getItem("firstName");
   const lastName = localStorage.getItem("lastName");
+  const navigate = useNavigate();
 
   const handleLogout = () => {
 
@@ -15,6 +17,7 @@ const ProfileDropdown = ({ onLogout }) => {
         localStorage.removeItem("firstName");
         localStorage.removeItem("lastName");
         onLogout();
+        navigate("/");
       })
       .catch(error => {
         console.log(error);
@@ -53,7 +56,7 @@ const ProfileDropdown = ({ onLogout }) => {
           </Link>
         </li>
         <li className="list-item" onClick={handleLogout}>
-          <Link to="/" className="link-light">
+          <Link className="link-light">
             Logout
           </Link>
         </li>

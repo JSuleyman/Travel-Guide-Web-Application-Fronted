@@ -46,47 +46,45 @@ const RegisterComponent = ({ setAuth }) => {
         password: Yup.string().required("Password is required"),
     });
 
+    const onSubmit = (values) => {
+        console.log("submitting...");
+        axios
+            .post("https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/api/v1/auth/register", {
+                firstname: values.firstName,
+                lastname: values.lastName,
+                email: values.email,
+                password: values.password,
+            })
+            .then((response) => {
+                // toastr.success('Register sucscessful!');
+                navigate("/");
+            })
+            .catch((error) => {
+                // Hata durumunda
+                if (error.response && error.response.data && error.response.data.message) {
+                    const errorMessage = error.response.data.message;
+                    console.log(errorMessage);
+                    toast.error(errorMessage);
+                } else {
+                    console.log("An error occurred:", error.message);
+                    toast.error("An error occurred");
+                }
+                formik.setSubmitting(false); // isSubmitting değerini false olarak ayarla
+            });
+    }
+
     const formik = useFormik({
         initialValues: {
-            firstName: "",
-            lastName: "",
             email: "",
             password: "",
+            remember: true,
         },
         validationSchema: SignupSchema,
-        onSubmit: (values) => {
-            console.log("submitting...");
-            axios
-                .post("https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/api/v1/auth/register", {
-                    firstname: values.firstName,
-                    lastname: values.lastName,
-                    email: values.email,
-                    password: values.password,
-                })
-                .then((response) => {
-                    // toastr.success('Register sucscessful!');
-                    navigate("/");
-                })
-                .catch((error) => {
-                    if (error.response || error.response.data || error.response.data.message) {
-                        const errorMessage = error.response.data.message;
-                        console.log(errorMessage);
-                        toast.error(errorMessage);
-                        // Hata iletisini kullanıcıya göster
-                    } else {
-                        // Genel hata durumu
-                        // Hata iletisini kullanıcıya göster
-                    }
-                    // if (error.message === 'This email is already') {
-                    //     toastr.error('This email is already!');
-                    // } else {
-                    //     toastr.error('Bir hata oluştu: ' + error.message);
-                    // }
-                });
-        },
+        onSubmit: onSubmit,
     });
 
-    const { errors, touched, values, handleSubmit, isSubmitting, getFieldProps } = formik;
+    const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } =
+        formik;
 
     return (
         <FormikProvider value={formik}>

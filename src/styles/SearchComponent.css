@@ -93,7 +93,6 @@
     border-radius: 50%;
 }
 
-
 .popup-animation {
     animation: popupScale 0.3s ease-in-out;
 }
@@ -126,4 +125,13 @@
     to {
         transform: scale(1);
     }
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.clickable:hover {
+    background-color: #ece9e9;
+    /* Add any other styles you want for the hover effect */
 }

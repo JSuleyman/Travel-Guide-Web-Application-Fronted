@@ -1,3 +1,147 @@
+import React, { useState, useRef, useEffect } from 'react';
+import './index.css';
+
+const ImageGallery = ({ onImageSelect, onDeleteImage, shouldResetImages }) => {
+    const [images, setImages] = useState([]);
+    const fileInputRef = useRef(null);
+
+    const handleImageUpload = (event) => {
+        const newImages = Array.from(event.target.files);
+        setImages([...images, ...newImages]);
+        fileInputRef.current.value = null;
+
+        onImageSelect(newImages[newImages.length - 1]);
+    };
+
+    const handleImageDelete = (index) => {
+        const deletedImage = images[index];
+        const updatedImages = [...images];
+        updatedImages.splice(index, 1);
+        setImages(updatedImages);
+
+        onDeleteImage(deletedImage);
+    };
+
+    const handleFileSelect = () => {
+        fileInputRef.current.value = null;
+    };
+
+    useEffect(() => {
+        if (shouldResetImages) {
+            setImages([]);
+        }
+    }, [shouldResetImages]);
+
+    return (
+        <div>
+            <h2>Image Gallery</h2>
+            <div className="image-container">
+                <div className="file-input-container">
+                    <label htmlFor="file-upload" className="custom-file-upload">
+                        Yükle
+                    </label>
+                    <input
+                        ref={fileInputRef}
+                        id="file-upload"
+                        type="file"
+                        multiple
+                        onChange={handleImageUpload}
+                        onClick={handleFileSelect}
+                        style={{ display: 'none' }}
+                    />
+                </div>
+                {images.length > 0 && (
+                    <div className="selected-image-container">
+                        {images.map((image, index) => (
+                            <div key={index} className="image-item">
+                                <img src={URL.createObjectURL(image)} alt="uploaded" className="selected-image" />
+                                <span className="selected-image-name">{image.name}</span>
+                                <span className="selected-image-size">{image.size} bytes</span>
+                                <button className="delete-button" onClick={() => handleImageDelete(index)}>
+                                    Delete
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+};
+
+export default ImageGallery;
+
+
+// import React, { useState, useRef } from 'react';
+// import './index.css';
+
+// const ImageGallery = ({ onImageSelect, onDeleteImage }) => {
+//     const [images, setImages] = useState([]);
+//     const fileInputRef = useRef(null);
+
+//     const handleImageUpload = (event) => {
+//         const newImages = Array.from(event.target.files);
+//         setImages([...images, ...newImages]);
+//         fileInputRef.current.value = null;
+
+//         // Seçilen resmi CustomCard bileşenine iletmek için onImageSelect fonksiyonunu çağırın
+//         onImageSelect(newImages[newImages.length - 1]);
+//     };
+
+//     const handleImageDelete = (index) => {
+//         const deletedImage = images[index];
+//         const updatedImages = [...images];
+//         updatedImages.splice(index, 1);
+//         setImages(updatedImages);
+
+//         // Silinen resmi API'den de kaldırmak için onDeleteImage fonksiyonunu çağırın
+//         onDeleteImage(deletedImage);
+//     };
+
+//     const handleFileSelect = () => {
+//         fileInputRef.current.value = null;
+//     };
+
+//     return (
+//         <div>
+//             <h2>Image Gallery</h2>
+//             <div className="image-container">
+//                 <div className="file-input-container">
+//                     <label htmlFor="file-upload" className="custom-file-upload">
+//                         Yükle
+//                     </label>
+//                     <input
+//                         ref={fileInputRef}
+//                         id="file-upload"
+//                         type="file"
+//                         multiple
+//                         onChange={handleImageUpload}
+//                         onClick={handleFileSelect}
+//                         style={{ display: 'none' }}
+//                     />
+//                 </div>
+//                 {images.length > 0 && (
+//                     <div className="selected-image-container">
+//                         {images.map((image, index) => (
+//                             <div key={index} className="image-item">
+//                                 <img src={URL.createObjectURL(image)} alt="uploaded" className="selected-image" />
+//                                 <span className="selected-image-name">{image.name}</span>
+//                                 <span className="selected-image-size">{image.size} bytes</span>
+//                                 <button className="delete-button" onClick={() => handleImageDelete(index)}>
+//                                     Delete
+//                                 </button>
+//                             </div>
+//                         ))}
+//                     </div>
+//                 )}
+//             </div>
+//         </div>
+//     );
+// };
+
+// export default ImageGallery;
+
+
 // import React, { useState, useRef } from 'react';
 // import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 // import './index.css';
@@ -89,76 +233,6 @@
 // };
 
 // export default ImageGallery;
-
-import React, { useState, useRef } from 'react';
-import './index.css';
-
-const ImageGallery = ({ onImageSelect, onDeleteImage }) => {
-    const [images, setImages] = useState([]);
-    const fileInputRef = useRef(null);
-
-    const handleImageUpload = (event) => {
-        const newImages = Array.from(event.target.files);
-        setImages([...images, ...newImages]);
-        fileInputRef.current.value = null;
-
-        // Seçilen resmi CustomCard bileşenine iletmek için onImageSelect fonksiyonunu çağırın
-        onImageSelect(newImages[newImages.length - 1]);
-    };
-
-    const handleImageDelete = (index) => {
-        const deletedImage = images[index];
-        const updatedImages = [...images];
-        updatedImages.splice(index, 1);
-        setImages(updatedImages);
-
-        // Silinen resmi API'den de kaldırmak için onDeleteImage fonksiyonunu çağırın
-        onDeleteImage(deletedImage);
-    };
-
-    const handleFileSelect = () => {
-        fileInputRef.current.value = null;
-    };
-
-    return (
-        <div>
-            <h2>Image Gallery</h2>
-            <div className="image-container">
-                <div className="file-input-container">
-                    <label htmlFor="file-upload" className="custom-file-upload">
-                        Yükle
-                    </label>
-                    <input
-                        ref={fileInputRef}
-                        id="file-upload"
-                        type="file"
-                        multiple
-                        onChange={handleImageUpload}
-                        onClick={handleFileSelect}
-                        style={{ display: 'none' }}
-                    />
-                </div>
-                {images.length > 0 && (
-                    <div className="selected-image-container">
-                        {images.map((image, index) => (
-                            <div key={index} className="image-item">
-                                <img src={URL.createObjectURL(image)} alt="uploaded" className="selected-image" />
-                                <span className="selected-image-name">{image.name}</span>
-                                <span className="selected-image-size">{image.size} bytes</span>
-                                <button className="delete-button" onClick={() => handleImageDelete(index)}>
-                                    Delete
-                                </button>
-                            </div>
-                        ))}
-                    </div>
-                )}
-            </div>
-        </div>
-    );
-};
-
-export default ImageGallery;
-
 
 // import React, { useState, useRef } from 'react';
 // import './index.css';

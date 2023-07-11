@@ -73,7 +73,7 @@ const LoginForm = ({ onLogin }) => {
                 formik.setSubmitting(false); // isSubmitting değerini false olarak ayarla
             });
     };
-    
+
     const formik = useFormik({
         initialValues: {
             email: "",
@@ -156,7 +156,7 @@ const LoginForm = ({ onLogin }) => {
                             justifyContent="space-between"
                             sx={{ my: 2 }}
                         >
-                            <FormControlLabel
+                            {/* <FormControlLabel
                                 control={
                                     <Checkbox
                                         {...getFieldProps("remember")}
@@ -173,7 +173,7 @@ const LoginForm = ({ onLogin }) => {
                                 underline="hover"
                             >
                                 Forgot password?
-                            </Link>
+                            </Link> */}
                         </Stack>
 
                         <LoadingButton

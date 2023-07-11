@@ -69,14 +69,19 @@ const SearchComponent = () => {
                         const likeIcon = document.createElement("span");
                         likeIcon.classList.add("likeIconD");
                         likeIcon.innerHTML = `<i class="fas fa-thumbs-up"></i> ${likeCount}`;
-                        likeIcon.setAttribute("data-row-id", row.id); // ID'yi like ikonuna ekle
+                        likeIcon.setAttribute("data-row-id", row.id);
+                        likeIcon.setAttribute("title", "Like"); // Add tooltip text
                         resultDetails.appendChild(likeIcon);
 
                         const favoriteIcon = document.createElement("span");
                         favoriteIcon.classList.add("favorite");
                         favoriteIcon.innerHTML = '&nbsp;&nbsp;<i class="fas fa-star"></i>';
-                        favoriteIcon.setAttribute("data-row-id", row.id); // ID'yi favori ikonuna ekle
+                        favoriteIcon.setAttribute("data-row-id", row.id);
+                        favoriteIcon.setAttribute("title", "Favorite"); // Add tooltip text
                         resultDetails.appendChild(favoriteIcon);
+
+                        likeIcon.classList.add("clickable");
+                        favoriteIcon.classList.add("clickable");
 
                         resultContainer.appendChild(resultCard);
 
