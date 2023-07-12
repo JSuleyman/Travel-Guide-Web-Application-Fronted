@@ -90,7 +90,8 @@ const SearchComponent = () => {
                         checkLikeStatus(likeIcon, row.id);
 
                         resultCard.addEventListener("click", (event) => {
-                            handleCardClick(row.Id, row.id)
+                            debugger
+                            handleCardClick(row.destination, row.id)
                         });
 
                         favoriteIcon.addEventListener("click", (event) => {
