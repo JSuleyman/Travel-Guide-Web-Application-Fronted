@@ -16,7 +16,7 @@ const SearchComponent = () => {
             const token = localStorage.getItem("token");
 
             // HTTP GET isteği yap
-            fetch(`https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/places_visit/get?key=${selectedOption}`, {
+            fetch(`https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/travel_destination/get?key=${selectedOption}`, {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }

@@ -44,7 +44,7 @@ const CustomCard = () => {
         e.preventDefault();
 
         makeApiRequest(
-            'https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/places_visit',
+            'https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/travel_destination',
             'POST',
             {
                 categoryId,
@@ -73,7 +73,7 @@ const CustomCard = () => {
                     }
                 })
                     .catch(error => {
-                        makeApiRequest(`https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/places_visit/delete/${fkPlacesToVisitId}`, 'DELETE')
+                        makeApiRequest(`https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/travel_destination/delete/${fkPlacesToVisitId}`, 'DELETE')
                     });
                 setCategoryId('');
                 setDestinationName('');

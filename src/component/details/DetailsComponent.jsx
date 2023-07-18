@@ -18,7 +18,7 @@ const DetailsComponent = () => {
   const [cardStatus, setCardStatus] = useState('');
 
   const [newReplyComment, setNewReplyComment] = useState(0);
-  
+
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [replyCommentId, setReplyCommentId] = useState(null);
 
@@ -251,7 +251,7 @@ const DetailsComponent = () => {
                   </div>
                 )}
               </div>
-              <Replies commentId={comment.id} newReplyComment={newReplyComment}/>
+              <Replies commentId={comment.id} newReplyComment={newReplyComment} />
             </div>
           ))}
         </div>
