@@ -28,20 +28,19 @@ const ProfileDropdown = ({ onLogout }) => {
       });
   };
 
+  const fetchNotifications = async () => {
+    try {
+      const response = await makeApiRequest(
+        "https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/notification",
+        "GET"
+      );
+      console.log("API isteği tamamlandı:", response.data);
+      setNotifications(response.data);
+    } catch (error) {
+      console.error("Favoriler alınırken bir hata oluştu:", error);
+    }
+  };
   useEffect(() => {
-    const fetchNotifications = async () => {
-      try {
-        const response = await makeApiRequest(
-          "https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/notification",
-          "GET"
-        );
-        console.log("API isteği tamamlandı:", response.data);
-        setNotifications(response.data);
-      } catch (error) {
-        console.error("Favoriler alınırken bir hata oluştu:", error);
-      }
-    };
-
     // Make initial API call upon login
     fetchNotifications();
 
@@ -61,6 +60,7 @@ const ProfileDropdown = ({ onLogout }) => {
           "POST"
         )
           .then((response) => {
+            fetchNotifications();
             console.log("API isteği tamamlandı:", response.data);
           })
           .catch((error) => {

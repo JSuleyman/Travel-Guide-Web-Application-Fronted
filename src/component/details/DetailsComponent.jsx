@@ -25,7 +25,7 @@ const DetailsComponent = () => {
   useEffect(() => {
     const placesId = id;
 
-    makeApiRequest(`https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/places_visit_details?placesId=${placesId}`, 'GET')
+    makeApiRequest(`https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/travel_destination_details?placesId=${placesId}`, 'GET')
       .then(response => {
         console.log('API isteği tamamlandı:', response.data);
         if (response.data.status === 'COMPLETED') {
@@ -284,7 +284,7 @@ export default DetailsComponent;
 //   useEffect(() => {
 //     const placesId = id;
 
-//     makeApiRequest(`https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/places_visit_details?placesId=${placesId}`, 'GET')
+//     makeApiRequest(`https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/travel_destination_details?placesId=${placesId}`, 'GET')
 //       .then(response => {
 //         console.log('API isteği tamamlandı:', response.data);
 //         if (response.data.status === 'COMPLETED') {
