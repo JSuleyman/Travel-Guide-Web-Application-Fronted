@@ -46,7 +46,7 @@ const ProfileDropdown = ({ onLogout }) => {
     fetchNotifications();
 
     // Set interval to fetch notifications every 5 seconds
-    const interval = setInterval(fetchNotifications, 5000);
+    const interval = setInterval(fetchNotifications, 30000);
 
     return () => {
       clearInterval(interval);
