@@ -10,6 +10,7 @@ import CreatedByUserList from './pages/CreatedByUserList';
 import Register from './pages/Register';
 import ImageGallery from './img/ImageGallery';
 import NotificationTest from './notification/NotificationTest';
+import UserProfile from './component/profile/UserProfile';
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -45,8 +46,7 @@ const App = () => {
         <Route path="/custom_card" element={<CustomCard />} />
         <Route path="/my_cards" element={<CreatedByUserList />} />
         <Route path="/signup" element={<Register />} />
-        <Route path="/imgDeneme" element={<ImageGallery />} />
-        <Route path="/testNotification" element={<NotificationTest />} />
+        <Route path="/my_profile" element={<UserProfile />} />
       </Routes>
     </div>
   );

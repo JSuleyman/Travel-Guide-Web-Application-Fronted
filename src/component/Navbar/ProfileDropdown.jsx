@@ -44,7 +44,7 @@ const ProfileDropdown = ({ onLogout }) => {
     // Make initial API call upon login
     fetchNotifications();
 
-    // Set interval to fetch notifications every 5 seconds
+    // Set interval to fetch notifications every 30 seconds
     const interval = setInterval(fetchNotifications, 30000);
 
     return () => {
@@ -99,6 +99,11 @@ const ProfileDropdown = ({ onLogout }) => {
         <li className="list-item">
           <Link to="/my_cards" className="link-light">
             Created By Me
+          </Link>
+        </li>
+        <li className="list-item">
+          <Link to="/my_profile" className="link-light">
+            Profile
           </Link>
         </li>
         <li className="list-item" onClick={handleLogout}>
