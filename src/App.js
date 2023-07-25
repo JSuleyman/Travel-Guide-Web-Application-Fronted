@@ -8,9 +8,10 @@ import DetailsComponent from './component/details/DetailsComponent';
 import CustomCard from './component/custom_card/CustomCard';
 import CreatedByUserList from './pages/CreatedByUserList';
 import Register from './pages/Register';
-import ImageGallery from './img/ImageGallery';
-import NotificationTest from './notification/NotificationTest';
+
 import UserProfile from './component/profile/UserProfile';
+import ChangePassword from './component/profile/password/ChangePassword';
+import ChangeFullName from './component/profile/fullname/ChangeFullName';
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -47,6 +48,9 @@ const App = () => {
         <Route path="/my_cards" element={<CreatedByUserList />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/my_profile" element={<UserProfile />} />
+        <Route path="/change_password" element={<ChangePassword />} />
+        <Route path="/change_full_name" element={<ChangeFullName />} />
+
       </Routes>
     </div>
   );
