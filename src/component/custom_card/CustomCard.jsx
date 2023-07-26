@@ -4,6 +4,8 @@ import makeApiRequest from '../../api/makeApiRequest';
 import ImageGallery from '../../img/ImageGallery';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import IconList from './IconList';
 
 const CustomCard = () => {
     const [categoryId, setCategoryId] = useState('');
@@ -14,6 +16,7 @@ const CustomCard = () => {
     const [events, setEvents] = useState('');
     const [keyOptions, setKeyOptions] = useState([]);
     const [shouldResetImages, setShouldResetImages] = useState(false);
+    const [selectedIcons, setSelectedIcons] = useState([]);
 
     const apiUrl = 'https://travel-guide-backend-7e73c60545d8.herokuapp.com/tavel_place/getAll';
 
@@ -51,7 +54,8 @@ const CustomCard = () => {
                 destinationName,
                 estimatedCost,
                 userComments,
-                events
+                events,
+                selectedIcons: selectedIcons.map((icon) => icon.iconName)
             }
         )
             .then(response => {
@@ -99,9 +103,17 @@ const CustomCard = () => {
 
     useEffect(() => {
         if (shouldResetImages) {
-          setShouldResetImages(false);
+            setShouldResetImages(false);
         }
-      }, [shouldResetImages]);
+    }, [shouldResetImages]);
+
+    const handleIconsSelect = (icon) => {
+        setSelectedIcons((prevIcons) => [...prevIcons, icon]);
+    };
+
+    const handleIconRemove = (updatedIcons) => {
+        setSelectedIcons(updatedIcons);
+    };
 
     return (
         <div className="container">
@@ -145,10 +157,10 @@ const CustomCard = () => {
                     />
                 </div>
 
-                <ImageGallery 
-                onImageSelect={handleImageSelect} 
-                onDeleteImage={handleImageDelete} 
-                shouldResetImages={shouldResetImages}
+                <ImageGallery
+                    onImageSelect={handleImageSelect}
+                    onDeleteImage={handleImageDelete}
+                    shouldResetImages={shouldResetImages}
                 />
 
                 <div className="form-group">
@@ -172,6 +184,12 @@ const CustomCard = () => {
                         className="form-control"
                     />
                 </div>
+
+                <IconList
+                    selectedIcons={selectedIcons}
+                    onIconsSelect={handleIconsSelect}
+                    onIconRemove={handleIconRemove}
+                />
 
                 <button type="submit" className="btn btn-primary">
                     Create Custom Card

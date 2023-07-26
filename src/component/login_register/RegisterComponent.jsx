@@ -75,8 +75,8 @@ const RegisterComponent = ({ setAuth }) => {
 
     const formik = useFormik({
         initialValues: {
-            email: "",
-            password: "",
+            email: "" || null,
+            password: "" || null,
             remember: true,
         },
         validationSchema: SignupSchema,

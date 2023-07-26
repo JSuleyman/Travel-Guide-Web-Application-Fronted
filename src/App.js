@@ -12,15 +12,14 @@ import Register from './pages/Register';
 import UserProfile from './component/profile/UserProfile';
 import ChangePassword from './component/profile/password/ChangePassword';
 import ChangeFullName from './component/profile/fullname/ChangeFullName';
+import IconList from './component/custom_card/IconList';
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [username, setUsername] = useState('');
 
   useEffect(() => {
-    // Sayfa yeniden yüklendiğinde oturumu kontrol et
     const token = localStorage.getItem('token');
-    // localStorage.removeItem("token");
+
     if (token) {
       setLoggedIn(true);
     } else {
@@ -40,16 +39,17 @@ const App = () => {
     <div>
       {loggedIn && <ProfileDropdown onLogout={handleLogout} />}
       <Routes>
-        <Route path="/" element={<Login onLogin={handleLogin} />} />
-        <Route path="/search" element={<SearchComponent />} />
-        <Route path="/favorites" element={<FavoritesComponent />} />
-        <Route path="/details/:id" element={<DetailsComponent />} />
-        <Route path="/custom_card" element={<CustomCard />} />
-        <Route path="/my_cards" element={<CreatedByUserList />} />
-        <Route path="/signup" element={<Register />} />
-        <Route path="/my_profile" element={<UserProfile />} />
-        <Route path="/change_password" element={<ChangePassword />} />
-        <Route path="/change_full_name" element={<ChangeFullName />} />
+        {!loggedIn && <Route path="/" element={<Login onLogin={handleLogin} />} />}
+        {loggedIn && <Route path="/search" element={<SearchComponent />} />}
+        {loggedIn && <Route path="/favorites" element={<FavoritesComponent />} />}
+        {loggedIn && <Route path="/details/:id" element={<DetailsComponent />} />}
+        {loggedIn && <Route path="/custom_card" element={<CustomCard />} />}
+        {loggedIn && <Route path="/my_cards" element={<CreatedByUserList />} />}
+        {!loggedIn && <Route path="/signup" element={<Register />} />}
+        {loggedIn && <Route path="/my_profile" element={<UserProfile />} />}
+        {loggedIn && <Route path="/change_password" element={<ChangePassword />} />}
+        {loggedIn && <Route path="/change_full_name" element={<ChangeFullName />} />}
+        {loggedIn && <Route path="/icon_list" element={<IconList />} />}
 
       </Routes>
     </div>
