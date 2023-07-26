@@ -84,21 +84,15 @@ const FavoritesComponent = () => {
             });
     };
 
-    const handleCardClick = (rowId, userComments, events, imageUrl) => {
+    const handleCardClick = (rowId, id) => {
         const state = {
-            userComment: null,
-            events: null,
-            imageUrl: null
+            id: null
         };
 
-        if (location.state && location.state.userComment && location.state.events && location.state.imageUrl) {
-            state.userComment = location.state.userComment;
-            state.events = location.state.events;
-            state.imageUrl = location.state.imageUrl;
+        if (location.state && location.state.id) {
+            state.id = location.state.id;
         } else {
-            state.userComment = userComments;
-            state.events = events;
-            state.imageUrl = imageUrl;
+            state.id = id;
         }
 
         navigate(`/details/${rowId}`, { state });
@@ -116,9 +110,9 @@ const FavoritesComponent = () => {
         <div className="search-container">
             <div id="result-container" className="container">
                 {favorites.map(row => (
-                    <div key={row.id} className="result-card" onClick={() => handleCardClick(row.destinationName, row.userComments, row.events, row.imageUrl)}>
+                    <div key={row.id} className="result-card" onClick={() => handleCardClick(row.destinationName, row.id)}>
                         <div className="result-image">
-                            <img src={`/${row.imageUrl}`} alt={row.destinationName} />
+                            <img src={`https://travel-guide-backend-7e73c60545d8.herokuapp.com/image/${row.id}/${row.imageUrl}`} alt={row.destinationName} />
                         </div>
                         <div className="result-details">
                             <h5 className="result-city">{row.destinationName}</h5>
