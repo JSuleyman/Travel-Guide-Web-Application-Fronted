@@ -71,8 +71,8 @@ const LoginForm = ({ onLogin }) => {
 
     const formik = useFormik({
         initialValues: {
-            email: "",
-            password: "",
+            email: "" || null,
+            password: "" || null,
             remember: true,
         },
         validationSchema: LoginSchema,
@@ -106,6 +106,7 @@ const LoginForm = ({ onLogin }) => {
                         <TextField
                             sx={{ fontSize: "20px" }}
                             fullWidth
+                            className="my-class"
                             autoComplete="username"
                             type="email"
                             label="Email Address"
@@ -116,6 +117,7 @@ const LoginForm = ({ onLogin }) => {
 
                         <TextField
                             fullWidth
+                            className="my-class"
                             autoComplete="current-password"
                             type={showPassword ? "text" : "password"}
                             label="Password"
