@@ -6,11 +6,8 @@ import axios from "axios";
 
 import {
     Box,
-    Checkbox,
-    FormControlLabel,
     IconButton,
     InputAdornment,
-    Link,
     Stack,
     TextField,
 } from "@mui/material";
@@ -32,11 +29,9 @@ const animate = {
 
 const LoginForm = ({ onLogin }) => {
     const navigate = useNavigate();
-    const location = useLocation();
-    const from = location.state?.from?.pathname || "/";
 
     const [showPassword, setShowPassword] = useState(false);
-
+    //  useEffect(()=>{},[formik])
     const LoginSchema = Yup.object().shape({
         email: Yup.string()
             .email("Provide a valid email address")
@@ -47,17 +42,17 @@ const LoginForm = ({ onLogin }) => {
     const onSubmit = (values) => {
         console.log("submitting...");
         axios
-            .post("https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/api/v1/auth/authenticate", {
+            .post("https://travel-guide-backend-7e73c60545d8.herokuapp.com/api/v1/auth/authenticate", {
                 email: values.email,
                 password: values.password,
             })
             .then((response) => {
                 // İşlem başarılı olduğunda
                 localStorage.setItem("token", response.data.token);
-                toast.success("Login successful!");
                 localStorage.setItem('firstName', response.data.firstName);
                 localStorage.setItem('lastName', response.data.lastName);
                 onLogin(response.data.firstName, response.data.lastName);
+                toast.success("Login successful!");
                 navigate("/search");
             })
             .catch((error) => {
@@ -252,7 +247,7 @@ export default LoginForm;
 //         onSubmit: (values) => {
 //             console.log("submitting...");
 //             axios
-//                 .post("https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/api/v1/auth/authenticate", {
+//                 .post("https://travel-guide-backend-7e73c60545d8.herokuapp.com/api/v1/auth/authenticate", {
 //                     email: values.email,
 //                     password: values.password,
 //                 })

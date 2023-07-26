@@ -116,7 +116,7 @@ export default Login;
         //     headers: {
         //         'Content-Type': 'application/json'
         //     },
-        //     url: 'https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/api/v1/auth/authenticate',
+        //     url: 'https://travel-guide-backend-7e73c60545d8.herokuapp.com/api/v1/auth/authenticate',
         //     data: JSON.stringify({
         //         email: email,
         //         password: password

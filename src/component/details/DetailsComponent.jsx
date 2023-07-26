@@ -22,10 +22,19 @@ const DetailsComponent = () => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [replyCommentId, setReplyCommentId] = useState(null);
 
+  const [offset, setOffset] = useState(0);
+  const [limit, setLimit] = useState(10);
+
+
+  useEffect(() => {
+    userCommentsList(id, offset, limit);
+  }, [id, offset, limit]);
+
+
   useEffect(() => {
     const placesId = id;
 
-    makeApiRequest(`https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/travel_destination_details?placesId=${placesId}`, 'GET')
+    makeApiRequest(`https://travel-guide-backend-7e73c60545d8.herokuapp.com/travel_destination_details?placesId=${placesId}`, 'GET')
       .then(response => {
         console.log('API isteği tamamlandı:', response.data);
         if (response.data.status === 'COMPLETED') {
@@ -49,7 +58,7 @@ const DetailsComponent = () => {
       userComment: userinYazdigiYorum
     };
 
-    makeApiRequest('https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/user_comment', 'POST', payload)
+    makeApiRequest('https://travel-guide-backend-7e73c60545d8.herokuapp.com/user_comment', 'POST', payload)
       .then(response => {
         console.log('Yorum gönderildi:', response.data);
         setuserinYazdigiYorum('');
@@ -66,7 +75,7 @@ const DetailsComponent = () => {
       replyMessage: replyMessage
     };
 
-    makeApiRequest('https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/user_comment_reply', 'POST', payload)
+    makeApiRequest('https://travel-guide-backend-7e73c60545d8.herokuapp.com/user_comment_reply', 'POST', payload)
       .then(response => {
         console.log('Reply submitted:', response.data);
         setReplyCommentId(null);
@@ -79,7 +88,7 @@ const DetailsComponent = () => {
   };
 
   const userCommentsList = () => {
-    const url = `https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/user_comment/details_id?fkPlacesId=${id}`;
+    const url = `https://travel-guide-backend-7e73c60545d8.herokuapp.com/user_comment/details_id?fkPlacesId=${id}&page=${offset}&size=${limit}`;
 
     makeApiRequest(url, 'GET')
       .then(response => {
@@ -102,7 +111,7 @@ const DetailsComponent = () => {
   };
 
   const fetchCurrentUserId = () => {
-    const url = 'https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/user_comment/current_user_id';
+    const url = 'https://travel-guide-backend-7e73c60545d8.herokuapp.com/user_comment/current_user_id';
 
     makeApiRequest(url, 'GET')
       .then(response => {
@@ -162,12 +171,17 @@ const DetailsComponent = () => {
     setReplyCommentId(null);
   };
 
+  const handleLoadMore = () => {
+    setLimit((prevOffset) => prevOffset + 1 * limit); // Offset'i güncelleyerek bir sonraki sayfayı getir
+    // setOffset((prevOffset) => prevOffset + 1 * limit); // Offset'i güncelleyerek bir sonraki sayfayı getir
+  };
+
   return (
     <div className="details-container">
       <div className="details-image">
         {imageUrls.length > 0 && (
           <img
-            src={`https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/image/${id}/${imageUrls[selectedImageIndex]}`}
+            src={`https://travel-guide-backend-7e73c60545d8.herokuapp.com/image/${id}/${imageUrls[selectedImageIndex]}`}
             alt="Resim"
             className="image-preview"
           />
@@ -253,7 +267,11 @@ const DetailsComponent = () => {
               </div>
               <Replies commentId={comment.id} newReplyComment={newReplyComment} />
             </div>
+
           ))}
+          <button className="load-more-button" onClick={handleLoadMore}>
+            Daha Fazla Yükle
+          </button>
         </div>
       </div>
     </div>
@@ -284,7 +302,7 @@ export default DetailsComponent;
 //   useEffect(() => {
 //     const placesId = id;
 
-//     makeApiRequest(`https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/travel_destination_details?placesId=${placesId}`, 'GET')
+//     makeApiRequest(`https://travel-guide-backend-7e73c60545d8.herokuapp.com/travel_destination_details?placesId=${placesId}`, 'GET')
 //       .then(response => {
 //         console.log('API isteği tamamlandı:', response.data);
 //         if (response.data.status === 'COMPLETED') {
@@ -307,7 +325,7 @@ export default DetailsComponent;
 //       userComment: userinYazdigiYorum
 //     };
 
-//     makeApiRequest('https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/user_comment', 'POST', payload)
+//     makeApiRequest('https://travel-guide-backend-7e73c60545d8.herokuapp.com/user_comment', 'POST', payload)
 //       .then(response => {
 //         console.log('Yorum gönderildi:', response.data);
 //         setuserinYazdigiYorum('');
@@ -324,7 +342,7 @@ export default DetailsComponent;
 //       replyMessage: replyMessage
 //     };
 
-//     makeApiRequest('https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/user_comment_reply', 'POST', payload)
+//     makeApiRequest('https://travel-guide-backend-7e73c60545d8.herokuapp.com/user_comment_reply', 'POST', payload)
 //       .then(response => {
 //         console.log('Reply submitted:', response.data);
 //         setReplyCommentId(null);
@@ -336,7 +354,7 @@ export default DetailsComponent;
 //   };
 
 //   const userCommentsList = () => {
-//     const url = `https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/user_comment/details_id?fkPlacesId=${id}`;
+//     const url = `https://travel-guide-backend-7e73c60545d8.herokuapp.com/user_comment/details_id?fkPlacesId=${id}`;
 
 //     makeApiRequest(url, 'GET')
 //       .then(response => {
@@ -359,7 +377,7 @@ export default DetailsComponent;
 //   };
 
 //   const fetchCurrentUserId = () => {
-//     const url = 'https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/user_comment/current_user_id';
+//     const url = 'https://travel-guide-backend-7e73c60545d8.herokuapp.com/user_comment/current_user_id';
 
 //     makeApiRequest(url, 'GET')
 //       .then(response => {
@@ -410,7 +428,7 @@ export default DetailsComponent;
 //       <div className="details-image">
 //         {imageUrls.length > 0 && (
 //           <img
-//             src={`https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/image/${id}/${imageUrls[selectedImageIndex]}`}
+//             src={`https://travel-guide-backend-7e73c60545d8.herokuapp.com/image/${id}/${imageUrls[selectedImageIndex]}`}
 //             alt="Resim"
 //             className="image-preview"
 //           />

@@ -11,7 +11,7 @@ const ChangeFullName = () => {
         e.preventDefault();
 
         makeApiRequest(
-            "https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/user_profile/full_name",
+            "https://travel-guide-backend-7e73c60545d8.herokuapp.com/user_profile/full_name",
             'PUT',
             {
                 firstName,

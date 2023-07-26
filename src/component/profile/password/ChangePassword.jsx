@@ -16,7 +16,7 @@ const ChangePassword = () => {
             return;
         }
         makeApiRequest(
-            "https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/api/v1/auth/change_password",
+            "https://travel-guide-backend-7e73c60545d8.herokuapp.com/api/v1/auth/change_password",
             'PUT',
             {
                 oldPassword,

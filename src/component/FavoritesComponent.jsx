@@ -15,7 +15,7 @@ const FavoritesComponent = () => {
     }, []);
 
     const fetchFavorites = (token) => {
-        fetch("https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/star/getAll", {
+        fetch("https://travel-guide-backend-7e73c60545d8.herokuapp.com/star/getAll", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -46,7 +46,7 @@ const FavoritesComponent = () => {
     };
 
     const addFavorite = (token, rowId) => {
-        fetch("https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/star/favorites/add", {
+        fetch("https://travel-guide-backend-7e73c60545d8.herokuapp.com/star/favorites/add", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -65,7 +65,7 @@ const FavoritesComponent = () => {
     };
 
     const deleteFavorite = (token, rowId) => {
-        fetch("https://heroku-deneme-backend-5f73e229a56a.herokuapp.com/star/favorites/delete", {
+        fetch("https://travel-guide-backend-7e73c60545d8.herokuapp.com/star/favorites/delete", {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
