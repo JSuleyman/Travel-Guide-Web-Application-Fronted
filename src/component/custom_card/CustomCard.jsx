@@ -86,6 +86,7 @@ const CustomCard = () => {
                 setShouldResetImages(true);
                 setUserComments('');
                 setEvents('');
+                setSelectedIcons([]);
             })
             .catch(error => {
                 // Hata durumu
