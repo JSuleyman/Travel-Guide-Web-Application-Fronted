@@ -18,7 +18,7 @@ const CustomCard = () => {
     const [shouldResetImages, setShouldResetImages] = useState(false);
     const [selectedIcons, setSelectedIcons] = useState([]);
 
-    const apiUrl = 'https://travel-guide-backend-7e73c60545d8.herokuapp.com/tavel_place/getAll';
+    const apiUrl = 'https://travel-guide-backend-7e73c60545d8.herokuapp.com/travel_place/getAll';
 
     useEffect(() => {
         async function fetchKeyOptions() {

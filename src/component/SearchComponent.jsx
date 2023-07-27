@@ -130,7 +130,7 @@ const SearchComponent = () => {
     useEffect(() => {
         $.ajax({
             type: "GET",
-            url: "https://travel-guide-backend-7e73c60545d8.herokuapp.com/tavel_place/getAll",
+            url: "https://travel-guide-backend-7e73c60545d8.herokuapp.com/travel_place/getAll",
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token")
             },

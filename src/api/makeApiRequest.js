@@ -22,13 +22,12 @@ const makeApiRequest = async (url, method, body) => {
 
         return response;
     } catch (error) {
-        debugger
-        if(error.response.status === 403){
-            console.log("asoidjaujd")
-        }
-        if(error.response.status === "503"){
-            console.log("asasas")
-        }
+        // if (error.response.status === 403) {
+        //     console.log("asoidjaujd")
+        // }
+        // if (error.response.status === "503") {
+        //     console.log("asasas")
+        // }
         console.error('API Request Error:', error);
         throw error;
     }
