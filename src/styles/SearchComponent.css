@@ -135,3 +135,19 @@
     background-color: #ece9e9;
     /* Add any other styles you want for the hover effect */
 }
+
+.result-icons {
+    display: flex;
+    align-items: center;
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.icon-container span {
+    margin-left: 4px;
+    font-size: 14px;
+}

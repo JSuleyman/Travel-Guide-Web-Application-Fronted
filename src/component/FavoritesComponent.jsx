@@ -109,7 +109,7 @@ const FavoritesComponent = () => {
     return (
         <div className="search-container">
             <div id="result-container" className="container">
-                {favorites.map(row => (
+                {favorites?.map(row => (
                     <div key={row.id} className="result-card" onClick={() => handleCardClick(row.destinationName, row.id)}>
                         <div className="result-image">
                             <img src={`https://travel-guide-backend-7e73c60545d8.herokuapp.com/image/${row.id}/${row.imageUrl}`} alt={row.destinationName} />
@@ -117,7 +117,7 @@ const FavoritesComponent = () => {
                         <div className="result-details">
                             <h5 className="result-city">{row.destinationName}</h5>
                             <p className="result-money">Money: {row.estimatedCost}</p>
-                            <span className={`favorite ${favorites.some(favorite => favorite.id === row.id) ? "active" : ""}`} onClick={(event) => handleFavoriteClick(event, row.id)}>
+                            <span className={`favorite ${favorites?.some(favorite => favorite.id === row.id) ? "active" : ""}`} onClick={(event) => handleFavoriteClick(event, row.id)}>
                                 <i className="fas fa-star"></i>
                             </span>
                         </div>

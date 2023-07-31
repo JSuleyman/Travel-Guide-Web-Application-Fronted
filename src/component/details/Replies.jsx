@@ -5,7 +5,7 @@ import { faArrowAltCircleDown, faArrowAltCircleUp } from '@fortawesome/free-soli
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
-const Replies = ({ commentId, newReplyComment }) => {
+const Replies = ({ commentId, commentReplyCount }) => {
     const [showReplies, setShowReplies] = useState(false);
     const [replyComments, setReplyComments] = useState([]);
     const [currentUserId, setCurrentUserId] = useState('');
@@ -14,29 +14,34 @@ const Replies = ({ commentId, newReplyComment }) => {
     const [limit, setLimit] = useState(5);
 
     useEffect(() => {
-        fetchReplyCount(commentId);
-    }, [commentId]);
+        console.log("test" + commentReplyCount)
+        setReplyCount(commentReplyCount);
+    }, [commentReplyCount]);
 
-    useEffect(() => {
-        fetchReplyCount(commentId);
-    }, [newReplyComment]);
+    // useEffect(() => {
+    //     fetchReplyCount(commentId);
+    // }, [commentId]);
+
+    // useEffect(() => {
+    //     fetchReplyCount(commentId);
+    // }, [newReplyComment]);
 
     useEffect(() => {
         fetchReplyComments(commentId, offset, limit);
     }, [commentId, offset, limit]);
 
-    const fetchReplyCount = (commentId) => {
-        const url = `https://travel-guide-backend-7e73c60545d8.herokuapp.com/user_comment_reply/count/${commentId}`;
+    // const fetchReplyCount = (commentId) => {
+    //     const url = `https://travel-guide-backend-7e73c60545d8.herokuapp.com/user_comment_reply/count/${commentId}`;
 
-        makeApiRequest(url, 'GET')
-            .then(response => {
-                console.log(response.data);
-                setReplyCount(response.data);
-            })
-            .catch(error => {
-                console.error('Yanıt sayısı alınırken bir hata oluştu:', error);
-            });
-    };
+    //     makeApiRequest(url, 'GET')
+    //         .then(response => {
+    //             console.log(response.data);
+    //             setReplyCount(response.data);
+    //         })
+    //         .catch(error => {
+    //             console.error('Yanıt sayısı alınırken bir hata oluştu:', error);
+    //         });
+    // };
 
     const handleShowReplies = () => {
         setShowReplies(!showReplies);
@@ -52,25 +57,25 @@ const Replies = ({ commentId, newReplyComment }) => {
             .then(response => {
                 console.log(response.data);
                 setReplyComments(response.data);
-                fetchCurrentUserId();
+                // fetchCurrentUserId();
             })
             .catch(error => {
                 console.error('Yanıtlar alınırken bir hata oluştu:', error);
             });
     };
 
-    const fetchCurrentUserId = () => {
-        const url = 'https://travel-guide-backend-7e73c60545d8.herokuapp.com/user_comment/current_user_id';
+    // const fetchCurrentUserId = () => {
+    //     const url = 'https://travel-guide-backend-7e73c60545d8.herokuapp.com/user_comment/current_user_id';
 
-        makeApiRequest(url, 'GET')
-            .then(response => {
-                console.log(response.data);
-                setCurrentUserId(response.data);
-            })
-            .catch(error => {
-                console.error('Mevcut kullanıcı ID alınırken bir hata oluştu:', error);
-            });
-    };
+    //     makeApiRequest(url, 'GET')
+    //         .then(response => {
+    //             console.log(response.data);
+    //             setCurrentUserId(response.data);
+    //         })
+    //         .catch(error => {
+    //             console.error('Mevcut kullanıcı ID alınırken bir hata oluştu:', error);
+    //         });
+    // };
 
     function formatTimeAgo(dateTime) {
         const dateObj = new Date(dateTime);
@@ -114,7 +119,7 @@ const Replies = ({ commentId, newReplyComment }) => {
                     {replyComments.map(reply => (
                         <div key={reply.id} className="reply">
                             <div className="reply-header">
-                                <strong>{`${reply.firstName} ${reply.lastName} ${reply.userId === currentUserId ? '(me)' : ''}`}</strong>
+                                <strong>{`${reply.firstName} ${reply.lastName} ${reply.userId === reply.currentUserId ? '(me)' : ''}`}</strong>
                                 <span className="comment-date">{reply.dateAndTime ? formatTimeAgo(reply.dateAndTime) : ''}</span>
                             </div>
                             <p className="reply-body">{reply.replyCommentList}</p>

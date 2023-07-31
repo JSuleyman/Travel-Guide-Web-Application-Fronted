@@ -44,8 +44,8 @@ const ProfileDropdown = ({ onLogout }) => {
     // Make initial API call upon login
     fetchNotifications();
 
-    // Set interval to fetch notifications every 30 seconds
-    const interval = setInterval(fetchNotifications, 30000);
+    // Set interval to fetch notifications every 3 seconds
+    const interval = setInterval(fetchNotifications, 3000);
 
     return () => {
       clearInterval(interval);

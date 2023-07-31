@@ -14,10 +14,9 @@ const DetailsComponent = () => {
   const [fkDetailsId, setFkDetailsId] = useState('');
   const [comments, setComments] = useState([]);
   const [userinYazdigiYorum, setuserinYazdigiYorum] = useState('');
-  const [currentUserId, setCurrentUserId] = useState('');
   const [cardStatus, setCardStatus] = useState('');
 
-  const [newReplyComment, setNewReplyComment] = useState(0);
+  // const [newReplyComment, setNewReplyComment] = useState(0);
 
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [replyCommentId, setReplyCommentId] = useState(null);
@@ -80,7 +79,7 @@ const DetailsComponent = () => {
         console.log('Reply submitted:', response.data);
         setReplyCommentId(null);
         userCommentsList();
-        setNewReplyComment(prevValue => prevValue + 1);
+        // setNewReplyComment(prevValue => prevValue + 1);
       })
       .catch(error => {
         console.error('An error occurred while submitting the reply:', error);
@@ -100,28 +99,30 @@ const DetailsComponent = () => {
           userMessage: comment.userMessage,
           date: comment.dateAndTime,
           userId: comment.userId,
+          currentUserId: comment.currentUserId,
+          commentReplyCount: comment.commentReplyCount,
           replyMessage: ''
         }));
         setComments(userComments1);
-        fetchCurrentUserId();
+        // fetchCurrentUserId();
       })
       .catch(error => {
         console.error('Yorumlar alınırken bir hata oluştu:', error);
       });
   };
 
-  const fetchCurrentUserId = () => {
-    const url = 'https://travel-guide-backend-7e73c60545d8.herokuapp.com/user_comment/current_user_id';
+  // useEffect(() => {
+  //   const url = 'https://travel-guide-backend-7e73c60545d8.herokuapp.com/user_comment/current_user_id';
 
-    makeApiRequest(url, 'GET')
-      .then(response => {
-        console.log(response.data);
-        setCurrentUserId(response.data);
-      })
-      .catch(error => {
-        console.error('Mevcut kullanıcı ID alınırken bir hata oluştu:', error);
-      });
-  };
+  //   makeApiRequest(url, 'GET')
+  //     .then(response => {
+  //       console.log(response.data);
+  //       setCurrentUserId(response.data);
+  //     })
+  //     .catch(error => {
+  //       console.error('Mevcut kullanıcı ID alınırken bir hata oluştu:', error);
+  //     });
+  // }, [currentUserId]);
 
   function formatTimeAgo(dateTime) {
     const dateObj = new Date(dateTime);
@@ -200,12 +201,12 @@ const DetailsComponent = () => {
 
       <div className="details-content">
         <div className="details-section">
-          <h2>Kullanıcının Yorumu</h2>
+          <h2 className='h2-detal-component'>Kullanıcının Yorumu</h2>
           <p>{userComment}</p>
         </div>
 
         <div className="details-section">
-          <h2>Neler Yapabilirsiniz</h2>
+          <h2 className='h2-detal-component'>Neler Yapabilirsiniz</h2>
           <p>{event}</p>
         </div>
       </div>
@@ -233,7 +234,7 @@ const DetailsComponent = () => {
           {comments.map((comment) => (
             <div key={comment.id} className="comment">
               <div className="comment-header">
-                <strong>{`${comment.firstName} ${comment.lastName} ${comment.userId === currentUserId ? '(me)' : ''}`}</strong>
+                <strong>{`${comment.firstName} ${comment.lastName} ${comment.userId === comment.currentUserId ? '(me)' : ''}`}</strong>
                 <span className="comment-date">{comment.date ? formatTimeAgo(comment.date) : ''}</span>
               </div>
               <p className="comment-body">{comment.userMessage}</p>
@@ -265,7 +266,7 @@ const DetailsComponent = () => {
                   </div>
                 )}
               </div>
-              <Replies commentId={comment.id} newReplyComment={newReplyComment} />
+              <Replies commentReplyCount={comment.commentReplyCount} commentId={comment.id} />
             </div>
 
           ))}

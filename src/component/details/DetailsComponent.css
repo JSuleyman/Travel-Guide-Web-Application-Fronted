@@ -25,6 +25,10 @@
   width: 100%;
 }
 
+.h2-detal-component {
+  font-weight: bold;
+}
+
 .section-title {
   margin-bottom: 10px;
 }
