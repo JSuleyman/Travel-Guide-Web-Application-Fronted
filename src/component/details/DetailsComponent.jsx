@@ -3,6 +3,7 @@ import { useParams, useLocation } from 'react-router-dom';
 import './DetailsComponent.css';
 import makeApiRequest from '../../api/makeApiRequest';
 import Replies from './Replies';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 const DetailsComponent = () => {
   const location = useLocation();
@@ -16,19 +17,20 @@ const DetailsComponent = () => {
   const [userinYazdigiYorum, setuserinYazdigiYorum] = useState('');
   const [cardStatus, setCardStatus] = useState('');
 
-  // const [newReplyComment, setNewReplyComment] = useState(0);
-
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [replyCommentId, setReplyCommentId] = useState(null);
 
   const [offset, setOffset] = useState(0);
   const [limit, setLimit] = useState(10);
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+
+  const [isHasData, setIsHasData] = useState(true);
 
   useEffect(() => {
     userCommentsList(id, offset, limit);
   }, [id, offset, limit]);
-
 
   useEffect(() => {
     const placesId = id;
@@ -48,25 +50,35 @@ const DetailsComponent = () => {
       .catch(error => {
         console.error('Detay alınırken bir hata oluştu:', error);
       });
-
   }, []);
 
   const handleCommentSubmit = () => {
-    const payload = {
-      travelDestinationDetailsId: fkDetailsId,
-      userComment: userinYazdigiYorum
-    };
+    if (!isSubmitting) {
+      setIsSubmitting(true);
 
-    makeApiRequest('https://travel-guide-backend-7e73c60545d8.herokuapp.com/user_comment', 'POST', payload)
-      .then(response => {
-        console.log('Yorum gönderildi:', response.data);
-        setuserinYazdigiYorum('');
-        userCommentsList();
-      })
-      .catch(error => {
-        console.error('Yorum gönderilirken bir hata oluştu:', error);
-      });
+      const payload = {
+        travelDestinationDetailsId: fkDetailsId,
+        userComment: userinYazdigiYorum
+      };
+
+      makeApiRequest('https://travel-guide-backend-7e73c60545d8.herokuapp.com/user_comment', 'POST', payload)
+        .then(response => {
+          console.log('Yorum gönderildi:', response.data);
+          setuserinYazdigiYorum('');
+          userCommentsList();
+          if (isHasData === false) {
+            window.location.reload();
+          }
+        })
+        .catch(error => {
+          console.error('Yorum gönderilirken bir hata oluştu:', error);
+        })
+        .finally(() => {
+          setIsSubmitting(false);
+        });
+    }
   };
+
 
   const handleReplySubmit = (commentId, replyMessage) => {
     const payload = {
@@ -79,7 +91,6 @@ const DetailsComponent = () => {
         console.log('Reply submitted:', response.data);
         setReplyCommentId(null);
         userCommentsList();
-        // setNewReplyComment(prevValue => prevValue + 1);
       })
       .catch(error => {
         console.error('An error occurred while submitting the reply:', error);
@@ -103,26 +114,21 @@ const DetailsComponent = () => {
           commentReplyCount: comment.commentReplyCount,
           replyMessage: ''
         }));
-        setComments(userComments1);
-        // fetchCurrentUserId();
+        // Offset sıfırlanmışsa, mevcut yorumları güncellemek yerine yeni yorumları ayarlayın
+        if (offset === 0) {
+          setComments(userComments1);
+        } else {
+          // Offset sıfırlanmamışsa, mevcut yorumları yeni yorumlarla birleştirin
+          setComments(prevComments => [...prevComments, ...userComments1]);
+        }
+        if (response.data.length === 0) {
+          setIsHasData(false);
+        }
       })
       .catch(error => {
         console.error('Yorumlar alınırken bir hata oluştu:', error);
       });
   };
-
-  // useEffect(() => {
-  //   const url = 'https://travel-guide-backend-7e73c60545d8.herokuapp.com/user_comment/current_user_id';
-
-  //   makeApiRequest(url, 'GET')
-  //     .then(response => {
-  //       console.log(response.data);
-  //       setCurrentUserId(response.data);
-  //     })
-  //     .catch(error => {
-  //       console.error('Mevcut kullanıcı ID alınırken bir hata oluştu:', error);
-  //     });
-  // }, [currentUserId]);
 
   function formatTimeAgo(dateTime) {
     const dateObj = new Date(dateTime);
@@ -173,9 +179,15 @@ const DetailsComponent = () => {
   };
 
   const handleLoadMore = () => {
-    setLimit((prevOffset) => prevOffset + 1 * limit); // Offset'i güncelleyerek bir sonraki sayfayı getir
-    // setOffset((prevOffset) => prevOffset + 1 * limit); // Offset'i güncelleyerek bir sonraki sayfayı getir
+    // Offset'i güncelleyerek bir sonraki sayfayı getirin
+    setOffset((prevOffset) => prevOffset + 1);
   };
+
+  const LoadingSpinner = () => (
+    <div className="loading-spinner">
+      <div className="spinner"></div>
+    </div>
+  );
 
   return (
     <div className="details-container">
@@ -212,6 +224,7 @@ const DetailsComponent = () => {
       </div>
 
       <div className={`comments-section ${cardStatus === 'COMPLETED' ? '' : 'hide'}`}>
+
         <div className="details-section">
           <h2 className="section-title">Yorum Yap</h2>
           <textarea
@@ -223,7 +236,7 @@ const DetailsComponent = () => {
           <button
             className={`comment-button ${!userinYazdigiYorum ? 'disabled-button' : ''}`}
             onClick={handleCommentSubmit}
-            disabled={!userinYazdigiYorum}
+            disabled={!userinYazdigiYorum || isSubmitting}
           >
             Gönder
           </button>
@@ -270,9 +283,13 @@ const DetailsComponent = () => {
             </div>
 
           ))}
-          <button className="load-more-button" onClick={handleLoadMore}>
-            Daha Fazla Yükle
-          </button>
+          <InfiniteScroll
+            dataLength={comments.length} // This is important to track the length of your data
+            next={handleLoadMore} // Load more function
+            hasMore={isHasData} // Set to true if there are more comments to load, or false if not (you can implement a condition here)
+            loader={<LoadingSpinner />} // Custom loader component, or you can use a built-in loader from the library
+            endMessage={<p>No more comments to load.</p>} // Message displayed when there are no more comments to load
+          />
         </div>
       </div>
     </div>
@@ -280,6 +297,13 @@ const DetailsComponent = () => {
 };
 
 export default DetailsComponent;
+
+
+// ----------
+
+// esas
+
+
 // import React, { useEffect, useState } from 'react';
 // import { useParams, useLocation } from 'react-router-dom';
 // import './DetailsComponent.css';
@@ -288,6 +312,7 @@ export default DetailsComponent;
 
 // const DetailsComponent = () => {
 //   const location = useLocation();
+
 //   const { id } = location.state || {};
 //   const [userComment, setUserComment] = useState('');
 //   const [event, setEvent] = useState('');
@@ -295,10 +320,21 @@ export default DetailsComponent;
 //   const [fkDetailsId, setFkDetailsId] = useState('');
 //   const [comments, setComments] = useState([]);
 //   const [userinYazdigiYorum, setuserinYazdigiYorum] = useState('');
-//   const [currentUserId, setCurrentUserId] = useState('');
 //   const [cardStatus, setCardStatus] = useState('');
+
+//   // const [newReplyComment, setNewReplyComment] = useState(0);
+
 //   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 //   const [replyCommentId, setReplyCommentId] = useState(null);
+
+//   const [offset, setOffset] = useState(0);
+//   const [limit, setLimit] = useState(10);
+
+
+//   useEffect(() => {
+//     userCommentsList(id, offset, limit);
+//   }, [id, offset, limit]);
+
 
 //   useEffect(() => {
 //     const placesId = id;
@@ -318,6 +354,7 @@ export default DetailsComponent;
 //       .catch(error => {
 //         console.error('Detay alınırken bir hata oluştu:', error);
 //       });
+
 //   }, []);
 
 //   const handleCommentSubmit = () => {
@@ -348,6 +385,7 @@ export default DetailsComponent;
 //         console.log('Reply submitted:', response.data);
 //         setReplyCommentId(null);
 //         userCommentsList();
+//         // setNewReplyComment(prevValue => prevValue + 1);
 //       })
 //       .catch(error => {
 //         console.error('An error occurred while submitting the reply:', error);
@@ -355,7 +393,7 @@ export default DetailsComponent;
 //   };
 
 //   const userCommentsList = () => {
-//     const url = `https://travel-guide-backend-7e73c60545d8.herokuapp.com/user_comment/details_id?fkPlacesId=${id}`;
+//     const url = `https://travel-guide-backend-7e73c60545d8.herokuapp.com/user_comment/details_id?fkPlacesId=${id}&page=${offset}&size=${limit}`;
 
 //     makeApiRequest(url, 'GET')
 //       .then(response => {
@@ -367,28 +405,30 @@ export default DetailsComponent;
 //           userMessage: comment.userMessage,
 //           date: comment.dateAndTime,
 //           userId: comment.userId,
+//           currentUserId: comment.currentUserId,
+//           commentReplyCount: comment.commentReplyCount,
 //           replyMessage: ''
 //         }));
 //         setComments(userComments1);
-//         fetchCurrentUserId();
+//         // fetchCurrentUserId();
 //       })
 //       .catch(error => {
 //         console.error('Yorumlar alınırken bir hata oluştu:', error);
 //       });
 //   };
 
-//   const fetchCurrentUserId = () => {
-//     const url = 'https://travel-guide-backend-7e73c60545d8.herokuapp.com/user_comment/current_user_id';
+//   // useEffect(() => {
+//   //   const url = 'https://travel-guide-backend-7e73c60545d8.herokuapp.com/user_comment/current_user_id';
 
-//     makeApiRequest(url, 'GET')
-//       .then(response => {
-//         console.log(response.data);
-//         setCurrentUserId(response.data);
-//       })
-//       .catch(error => {
-//         console.error('Mevcut kullanıcı ID alınırken bir hata oluştu:', error);
-//       });
-//   };
+//   //   makeApiRequest(url, 'GET')
+//   //     .then(response => {
+//   //       console.log(response.data);
+//   //       setCurrentUserId(response.data);
+//   //     })
+//   //     .catch(error => {
+//   //       console.error('Mevcut kullanıcı ID alınırken bir hata oluştu:', error);
+//   //     });
+//   // }, [currentUserId]);
 
 //   function formatTimeAgo(dateTime) {
 //     const dateObj = new Date(dateTime);
@@ -424,6 +464,25 @@ export default DetailsComponent;
 //     setReplyCommentId(commentId === replyCommentId ? '' : commentId);
 //   };
 
+//   const handleReplyCancel = (commentId) => {
+//     const updatedComments = comments.map(comment => {
+//       if (comment.id === commentId) {
+//         return {
+//           ...comment,
+//           replyMessage: ''
+//         };
+//       }
+//       return comment;
+//     });
+//     setComments(updatedComments);
+//     setReplyCommentId(null);
+//   };
+
+//   const handleLoadMore = () => {
+//     setLimit((prevOffset) => prevOffset + 1 * limit); // Offset'i güncelleyerek bir sonraki sayfayı getir
+//     // setOffset((prevOffset) => prevOffset + 1 * limit); // Offset'i güncelleyerek bir sonraki sayfayı getir
+//   };
+
 //   return (
 //     <div className="details-container">
 //       <div className="details-image">
@@ -448,12 +507,12 @@ export default DetailsComponent;
 
 //       <div className="details-content">
 //         <div className="details-section">
-//           <h2>Kullanıcının Yorumu</h2>
+//           <h2 className='h2-detal-component'>Kullanıcının Yorumu</h2>
 //           <p>{userComment}</p>
 //         </div>
 
 //         <div className="details-section">
-//           <h2>Neler Yapabilirsiniz</h2>
+//           <h2 className='h2-detal-component'>Neler Yapabilirsiniz</h2>
 //           <p>{event}</p>
 //         </div>
 //       </div>
@@ -481,38 +540,45 @@ export default DetailsComponent;
 //           {comments.map((comment) => (
 //             <div key={comment.id} className="comment">
 //               <div className="comment-header">
-//                 <strong>{`${comment.firstName} ${comment.lastName} ${comment.userId === currentUserId ? '(me)' : ''
-//                   }`}</strong>
+//                 <strong>{`${comment.firstName} ${comment.lastName} ${comment.userId === comment.currentUserId ? '(me)' : ''}`}</strong>
 //                 <span className="comment-date">{comment.date ? formatTimeAgo(comment.date) : ''}</span>
 //               </div>
 //               <p className="comment-body">{comment.userMessage}</p>
-//               {comment.id === replyCommentId && (
-//                 <div>
-//                   <textarea
-//                     className="reply-input"
-//                     value={comment.replyMessage}
-//                     onChange={(e) => {
-//                       const updatedComments = [...comments];
-//                       const commentIndex = updatedComments.findIndex((c) => c.id === comment.id);
-//                       updatedComments[commentIndex].replyMessage = e.target.value;
-//                       setComments(updatedComments);
-//                     }}
-//                     placeholder="Yanıtınızı buraya yazın..."
-//                   />
-//                   <button
-//                     className="reply-button"
-//                     onClick={() => handleReplySubmit(comment.id, comment.replyMessage)}
-//                   >
-//                     Gönder
-//                   </button>
-//                 </div>
-//               )}
-//               <Replies commentId={comment.id} />
 //               <button className="reply-button" onClick={() => handleReplyButtonClick(comment.id)}>
-//                 Yanıtla
+//                 <span className="reply-button-text">Yanıtla</span>
 //               </button>
+//               <div>
+//                 {comment.id === replyCommentId && (
+//                   <div className="reply-input-container">
+//                     <textarea
+//                       className="reply-input"
+//                       value={comment.replyMessage}
+//                       onChange={(e) => {
+//                         const updatedComments = [...comments];
+//                         const commentIndex = updatedComments.findIndex((c) => c.id === comment.id);
+//                         updatedComments[commentIndex].replyMessage = e.target.value;
+//                         setComments(updatedComments);
+//                       }}
+//                       placeholder="Yanıtınızı buraya yazın..."
+//                     />
+//                     <div className="reply-button-group">
+//                       <button className="reply-button-sum" onClick={() => handleReplySubmit(comment.id, comment.replyMessage)}>
+//                         Gönder
+//                       </button>
+//                       <button className="cancel-button" onClick={() => handleReplyCancel(comment.id)}>
+//                         İptal Et
+//                       </button>
+//                     </div>
+//                   </div>
+//                 )}
+//               </div>
+//               <Replies commentReplyCount={comment.commentReplyCount} commentId={comment.id} />
 //             </div>
+
 //           ))}
+//           <button className="load-more-button" onClick={handleLoadMore}>
+//             Daha Fazla Yükle
+//           </button>
 //         </div>
 //       </div>
 //     </div>
