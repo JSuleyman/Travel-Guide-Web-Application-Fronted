@@ -83,37 +83,37 @@ const ProfileDropdown = ({ onLogout }) => {
       <ul className="middle-items">
         <li className="list-item">
           <Link to="/search" className="link-light">
-            Search
+            Axtar
           </Link>
         </li>
         <li className="list-item">
           <Link to="/favorites" className="link-light">
-            Favorites
+            Sevimlilər
           </Link>
         </li>
         <li className="list-item">
           <Link to="/custom_card" className="link-light">
-            Custom Card
+            Xüsusi kart yarat
           </Link>
         </li>
         <li className="list-item">
           <Link to="/my_cards" className="link-light">
-            Created By Me
+            Yaratdıqlarım
           </Link>
         </li>
         <li className="list-item">
           <Link to="/my_profile" className="link-light">
-            Profile
+            Profil
           </Link>
         </li>
         <li className="list-item" onClick={handleLogout}>
-          <Link className="link-light">Logout</Link>
+          <Link className="link-light">Çıxış</Link>
         </li>
       </ul>
 
       <div className="notification-container">
         <button className="notification-button" onClick={toggleNotification}>
-          Notifications ({notifications.length})
+          Bildirimlər ({notifications.length})
         </button>
         {showNotification && (
           <div className="notification-box">

@@ -24,13 +24,13 @@ const UserProfile = () => {
                     className="profile-change-button"
                     onClick={() => handleName()}
                 >
-                    Change Name
+                    Adı və Soyadı dəyiş
                 </button>
                 <button
                     className="profile-change-button"
                     onClick={() => handlePassword()}
                 >
-                    Change Password
+                    Parolu dəyiş
                 </button>
             </div>
 

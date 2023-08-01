@@ -55,7 +55,7 @@ const Register = ({ setAuth }) => {
                         <Logo />
 
                         <Typography sx={{ color: "text.secondary", mb: 5 }}>
-                            Enter your details below.
+                            Aşağıda məlumatlarınızı daxil edin.
                         </Typography>
                     </HeadingStyle>
 
@@ -69,9 +69,9 @@ const Register = ({ setAuth }) => {
                         </Typography>
                     </Divider>
 
-                    <RegisterComponent setAuth={setAuth}/>
+                    <RegisterComponent setAuth={setAuth} />
 
-                    <Typography
+                    {/* <Typography
                         component={motion.p}
                         {...fadeInUp}
                         variant="body2"
@@ -87,7 +87,7 @@ const Register = ({ setAuth }) => {
                             Privacy Policy
                         </Link>
                         .
-                    </Typography>
+                    </Typography> */}
 
                     <Typography
                         component={motion.p}
@@ -96,9 +96,9 @@ const Register = ({ setAuth }) => {
                         align="center"
                         sx={{ mt: 3 }}
                     >
-                        Have an account?{" "}
+                        Hesabınız var?{" "}
                         <Link variant="subtitle2" component={RouterLink} to="/">
-                            Login
+                            Daxil ol
                         </Link>
                     </Typography>
                 </ContentStyle>

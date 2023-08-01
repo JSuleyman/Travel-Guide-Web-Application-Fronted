@@ -58,7 +58,7 @@ const Login = ({ onLogin }) => {
                     <HeadingStyle component={motion.div} {...fadeInUp}>
                         <Logo />
                         <fontSize  sx={{ color: "text.secondary", mb: 5,fontSize:"20px" }}>
-                            Login to your account
+                            
                         </fontSize >
                     </HeadingStyle>
 
@@ -81,9 +81,9 @@ const Login = ({ onLogin }) => {
                         align="center"
                         sx={{ mt: 10.5 }}
                     >
-                        Don’t have an account?{" "}
+                        Hesabınız yoxdur?{" "}
                         <Link variant="subtitle2" component={RouterLink} to="/signup">
-                            Register
+                            Qeydiyyatdan keç
                         </Link>
                     </fontSize >
                 </ContentStyle>

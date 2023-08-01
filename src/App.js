@@ -49,8 +49,6 @@ const App = () => {
         {loggedIn && <Route path="/my_profile" element={<UserProfile />} />}
         {loggedIn && <Route path="/change_password" element={<ChangePassword />} />}
         {loggedIn && <Route path="/change_full_name" element={<ChangeFullName />} />}
-        {loggedIn && <Route path="/icon_list" element={<IconList />} />}
-
       </Routes>
     </div>
   );

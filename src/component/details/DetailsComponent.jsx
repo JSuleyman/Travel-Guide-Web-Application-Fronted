@@ -138,16 +138,16 @@ const DetailsComponent = () => {
     const diffInSeconds = Math.floor(diffInMilliseconds / 1000);
 
     if (diffInSeconds < 60) {
-      return `${diffInSeconds} saniye önce`;
+      return `${diffInSeconds} saniyə əvvəl`;
     } else if (diffInSeconds < 3600) {
       const diffInMinutes = Math.floor(diffInSeconds / 60);
-      return `${diffInMinutes} dakika önce`;
+      return `${diffInMinutes} dəqiqə əvvəl`;
     } else if (diffInSeconds < 86400) {
       const diffInHours = Math.floor(diffInSeconds / 3600);
-      return `${diffInHours} saat önce`;
+      return `${diffInHours} saat əvvəl`;
     } else {
       const diffInDays = Math.floor(diffInSeconds / 86400);
-      return `${diffInDays} gün önce`;
+      return `${diffInDays} gün əvvəl`;
     }
   }
 
@@ -202,7 +202,7 @@ const DetailsComponent = () => {
         {imageUrls.length > 1 && (
           <div className="image-navigation">
             <button className="image-prev-button" onClick={handlePrevImage}>
-              Önceki
+              Əvvəlki
             </button>
             <button className="image-next-button" onClick={handleNextImage}>
               Sonraki
@@ -213,12 +213,12 @@ const DetailsComponent = () => {
 
       <div className="details-content">
         <div className="details-section">
-          <h2 className='h2-detal-component'>Kullanıcının Yorumu</h2>
+          <h2 className='h2-detal-component'>Şərh</h2>
           <p>{userComment}</p>
         </div>
 
         <div className="details-section">
-          <h2 className='h2-detal-component'>Neler Yapabilirsiniz</h2>
+          <h2 className='h2-detal-component'>Edilə biləcəklər siyahısı</h2>
           <p>{event}</p>
         </div>
       </div>
@@ -226,33 +226,33 @@ const DetailsComponent = () => {
       <div className={`comments-section ${cardStatus === 'COMPLETED' ? '' : 'hide'}`}>
 
         <div className="details-section">
-          <h2 className="section-title">Yorum Yap</h2>
+          <h2 className="section-title">Şərh yaz</h2>
           <textarea
             className="comment-input"
             value={userinYazdigiYorum}
             onChange={e => setuserinYazdigiYorum(e.target.value)}
-            placeholder="Yorumunuzu buraya yazın..."
+            placeholder="Şərhinizi buraya yazın..."
           />
           <button
             className={`comment-button ${!userinYazdigiYorum ? 'disabled-button' : ''}`}
             onClick={handleCommentSubmit}
             disabled={!userinYazdigiYorum || isSubmitting}
           >
-            Gönder
+            Göndər
           </button>
         </div>
 
         <div className="comments-list">
-          <h2>Kullanıcılara Ait Yorumlar</h2>
+          <h2>İstifadəçilərə aid şərhlər</h2>
           {comments.map((comment) => (
             <div key={comment.id} className="comment">
               <div className="comment-header">
-                <strong>{`${comment.firstName} ${comment.lastName} ${comment.userId === comment.currentUserId ? '(me)' : ''}`}</strong>
+                <strong>{`${comment.firstName} ${comment.lastName} ${comment.userId === comment.currentUserId ? '(mən)' : ''}`}</strong>
                 <span className="comment-date">{comment.date ? formatTimeAgo(comment.date) : ''}</span>
               </div>
               <p className="comment-body">{comment.userMessage}</p>
               <button className="reply-button" onClick={() => handleReplyButtonClick(comment.id)}>
-                <span className="reply-button-text">Yanıtla</span>
+                <span className="reply-button-text">Cavabla</span>
               </button>
               <div>
                 {comment.id === replyCommentId && (
@@ -266,14 +266,14 @@ const DetailsComponent = () => {
                         updatedComments[commentIndex].replyMessage = e.target.value;
                         setComments(updatedComments);
                       }}
-                      placeholder="Yanıtınızı buraya yazın..."
+                      placeholder="Cavabınızı buraya yazın..."
                     />
                     <div className="reply-button-group">
                       <button className="reply-button-sum" onClick={() => handleReplySubmit(comment.id, comment.replyMessage)}>
-                        Gönder
+                        Göndər
                       </button>
                       <button className="cancel-button" onClick={() => handleReplyCancel(comment.id)}>
-                        İptal Et
+                        Ləğv et
                       </button>
                     </div>
                   </div>

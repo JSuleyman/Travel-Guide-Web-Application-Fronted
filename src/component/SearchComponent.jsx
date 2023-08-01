@@ -56,13 +56,13 @@ const SearchComponent = () => {
 
                         const moneyParagraph = document.createElement("p");
                         moneyParagraph.classList.add("result-money");
-                        moneyParagraph.textContent = `Money: ${money}`;
+                        moneyParagraph.textContent = `Pul: ${money}`;
                         resultDetails.appendChild(moneyParagraph);
 
                         if (creadetBy) {
                             const credateBy = document.createElement("p");
                             credateBy.classList.add("result-creadet");
-                            credateBy.textContent = `Creadet By: ${creadetBy}`;
+                            credateBy.textContent = `Yaradıb: ${creadetBy}`;
                             resultDetails.appendChild(credateBy);
                         }
 
@@ -70,14 +70,14 @@ const SearchComponent = () => {
                         likeIcon.classList.add("likeIconD");
                         likeIcon.innerHTML = `<i class="fas fa-thumbs-up"></i> ${likeCount}`;
                         likeIcon.setAttribute("data-row-id", row.id);
-                        likeIcon.setAttribute("title", "Like"); // Add tooltip text
+                        likeIcon.setAttribute("title", "Bəyən"); // Add tooltip text
                         resultDetails.appendChild(likeIcon);
 
                         const favoriteIcon = document.createElement("span");
                         favoriteIcon.classList.add("favorite");
                         favoriteIcon.innerHTML = '&nbsp;&nbsp;<i class="fas fa-star"></i>';
                         favoriteIcon.setAttribute("data-row-id", row.id);
-                        favoriteIcon.setAttribute("title", "Favorite"); // Add tooltip text
+                        favoriteIcon.setAttribute("title", "Ulduz"); // Add tooltip text
                         resultDetails.appendChild(favoriteIcon);
 
                         likeIcon.classList.add("clickable");
@@ -307,13 +307,13 @@ const SearchComponent = () => {
         <div class="search-container">
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
-                    <h2>Arama Sistemi</h2>
+                    <h2>Axtarış et</h2>
                     <div class="input-group">
                         <select id="search-select" class="form-control">
                             <option value=""></option>
                         </select>
                         <span class="input-group-btn">
-                            <button id="search-button" class="btn btn-primary" type="button">Search</button>
+                            <button id="search-button" class="btn btn-primary" type="button">Axtar</button>
                         </span>
                     </div>
                 </div>

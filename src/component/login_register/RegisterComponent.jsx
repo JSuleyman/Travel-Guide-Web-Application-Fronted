@@ -99,7 +99,7 @@ const RegisterComponent = ({ setAuth }) => {
                     >
                         <TextField
                             fullWidth
-                            label="First name"
+                            label="Ad"
                             {...getFieldProps("firstName")}
                             error={Boolean(touched.firstName && errors.firstName)}
                             helperText={touched.firstName && errors.firstName}
@@ -107,7 +107,7 @@ const RegisterComponent = ({ setAuth }) => {
 
                         <TextField
                             fullWidth
-                            label="Last name"
+                            label="Soyad"
                             {...getFieldProps("lastName")}
                             error={Boolean(touched.lastName && errors.lastName)}
                             helperText={touched.lastName && errors.lastName}
@@ -169,7 +169,7 @@ const RegisterComponent = ({ setAuth }) => {
                             variant="contained"
                             loading={isSubmitting}
                         >
-                            Sign up
+                            QEYDİYYATDAN KEÇİN
                         </LoadingButton>
                     </Box>
                 </Stack>

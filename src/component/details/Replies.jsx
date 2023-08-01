@@ -109,7 +109,7 @@ const Replies = ({ commentId, commentReplyCount }) => {
             <button className={`reply-toggle-button ${showReplies ? 'open' : ''}`} onClick={handleShowReplies}>
                 {replyCount > 0 && (
                     <>
-                        Yanıtları {showReplies ? 'Gizle' : 'Göster'} ({replyCount})
+                        Cavabları {showReplies ? 'Gizlət' : 'Göstər'} ({replyCount})
                         <FontAwesomeIcon icon={showReplies ? faArrowAltCircleUp : faArrowAltCircleDown} className="arrow-icon" />
                     </>
                 )}
@@ -119,7 +119,7 @@ const Replies = ({ commentId, commentReplyCount }) => {
                     {replyComments.map(reply => (
                         <div key={reply.id} className="reply">
                             <div className="reply-header">
-                                <strong>{`${reply.firstName} ${reply.lastName} ${reply.userId === reply.currentUserId ? '(me)' : ''}`}</strong>
+                                <strong>{`${reply.firstName} ${reply.lastName} ${reply.userId === reply.currentUserId ? '(mən)' : ''}`}</strong>
                                 <span className="comment-date">{reply.dateAndTime ? formatTimeAgo(reply.dateAndTime) : ''}</span>
                             </div>
                             <p className="reply-body">{reply.replyCommentList}</p>

@@ -116,7 +116,7 @@ const FavoritesComponent = () => {
                         </div>
                         <div className="result-details">
                             <h5 className="result-city">{row.destinationName}</h5>
-                            <p className="result-money">Money: {row.estimatedCost}</p>
+                            <p className="result-money">Pul: {row.estimatedCost}</p>
                             <span className={`favorite ${favorites?.some(favorite => favorite.id === row.id) ? "active" : ""}`} onClick={(event) => handleFavoriteClick(event, row.id)}>
                                 <i className="fas fa-star"></i>
                             </span>

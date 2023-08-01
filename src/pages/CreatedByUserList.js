@@ -132,7 +132,7 @@ const CreatedByUserList = () => {
                                 <h5 className="result-city">
                                     {row.description} - {row.destinationName}
                                 </h5>
-                                <p className="result-money">Money: {row.estimatedCost}</p>
+                                <p className="result-money">Pul: {row.estimatedCost}</p>
                                 <p className="result-city">Status: {row.status}</p>
                                 <div className="result-icons">
                                     {row.iconList.map((icon, index) => (

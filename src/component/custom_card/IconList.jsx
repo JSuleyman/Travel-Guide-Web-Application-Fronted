@@ -26,7 +26,7 @@ const IconList = ({ selectedIcons, onIconsSelect, onIconRemove }) => {
 
     return (
         <div className="card_create_icon-icon-list">
-          <h4 className="card_create_icon-section-title">Simgeler:</h4>
+          <h4 className="card_create_icon-section-title">Simvollar:</h4>
           <div className="card_create_icon-icon-options">
             {iconOptions.map((option, index) => (
               <div key={index} className="card_create_icon-icon-item" onClick={() => handleIconSelect({ ...option, iconName: option.name })}>
@@ -39,7 +39,7 @@ const IconList = ({ selectedIcons, onIconsSelect, onIconRemove }) => {
           </div>
     
           <div className="card_create_icon-selected-icons">
-            <h4 className="card_create_icon-section-title">Seçili Simgeler:</h4>
+            <h4 className="card_create_icon-section-title">Seçilmiş simvollar:</h4>
             <div className="card_create_icon-selected-icons-container">
               {selectedIcons.map((icon, index) => (
                 <div key={index} onClick={() => handleIconRemove(icon)} className="card_create_icon-selected-icon">

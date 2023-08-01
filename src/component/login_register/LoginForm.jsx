@@ -180,7 +180,7 @@ const LoginForm = ({ onLogin }) => {
                             variant="contained"
                             loading={isSubmitting}
                         >
-                            {isSubmitting ? "loading..." : "Login"}
+                            {isSubmitting ? "loading..." : "DAXİL ol"}
                         </LoadingButton>
                     </Box>
                 </Box>

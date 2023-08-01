@@ -120,7 +120,7 @@ const CustomCard = () => {
         <div className="container">
             <form className="custom-card-form" onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label htmlFor="categoryId">Key ID:</label>
+                    <label htmlFor="categoryId">Şəhər:</label>
                     <select
                         id="categoryId"
                         value={categoryId}
@@ -137,7 +137,7 @@ const CustomCard = () => {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="destinationName">Places:</label>
+                    <label htmlFor="destinationName">Yer adı:</label>
                     <input
                         type="text"
                         id="destinationName"
@@ -148,7 +148,7 @@ const CustomCard = () => {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="estimatedCost">Many For Travel:</label>
+                    <label htmlFor="estimatedCost">Səyahət üçün pul miqdarı:</label>
                     <input
                         type="number"
                         id="estimatedCost"
@@ -165,7 +165,7 @@ const CustomCard = () => {
                 />
 
                 <div className="form-group">
-                    <label htmlFor="userComments">User Comments:</label>
+                    <label htmlFor="userComments">Şərh:</label>
                     <input
                         type="text"
                         id="userComments"
@@ -176,7 +176,7 @@ const CustomCard = () => {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="events">Events:</label>
+                    <label htmlFor="events">Edilə biləcəklər:</label>
                     <input
                         type="text"
                         id="events"
@@ -193,7 +193,7 @@ const CustomCard = () => {
                 />
 
                 <button type="submit" className="btn btn-primary">
-                    Create Custom Card
+                    Xususi cart yarat
                 </button>
             </form>
 

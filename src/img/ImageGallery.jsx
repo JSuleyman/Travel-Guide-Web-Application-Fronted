@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './index.css';
+import { fontWeight } from '@mui/system';
 
 const ImageGallery = ({ onImageSelect, onDeleteImage, shouldResetImages }) => {
     const [images, setImages] = useState([]);
@@ -34,11 +35,11 @@ const ImageGallery = ({ onImageSelect, onDeleteImage, shouldResetImages }) => {
 
     return (
         <div>
-            <h2>Image Gallery</h2>
+            <h2 style={{ fontWeight: 'bold' }}>Şəkil:</h2>
             <div className="image-container">
                 <div className="file-input-container">
                     <label htmlFor="file-upload" className="custom-file-upload">
-                        Yükle
+                        Yüklə
                     </label>
                     <input
                         ref={fileInputRef}
