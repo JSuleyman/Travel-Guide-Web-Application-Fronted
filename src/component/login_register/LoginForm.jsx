@@ -56,8 +56,13 @@ const LoginForm = ({ onLogin }) => {
                 navigate("/search");
             })
             .catch((error) => {
-                // Hata durumunda
-                if (error.response && error.response.data && error.response.data.message) {
+                debugger
+                var errorMessage = '';
+                if (error.response.data.errorMessage) {
+                    errorMessage = error.response.data.errorMessage;
+                    toast.error(errorMessage);
+                }
+                else if (error.response && error.response.data && error.response.data.message) {
                     const errorMessage = error.response.data.message;
                     console.log(errorMessage);
                     toast.error(errorMessage);

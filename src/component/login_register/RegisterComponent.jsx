@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 import { useState } from "react";
 import { useFormik, Form, FormikProvider } from "formik";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
     Stack,
     Box,
@@ -14,6 +14,7 @@ import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
+
 
 let easing = [0.6, -0.05, 0.01, 0.99];
 const animate = {
@@ -28,6 +29,7 @@ const animate = {
 
 const RegisterComponent = ({ setAuth }) => {
     const navigate = useNavigate();
+    const location = useLocation();
 
     const [showPassword, setShowPassword] = useState(false);
 
@@ -56,8 +58,17 @@ const RegisterComponent = ({ setAuth }) => {
                 password: values.password,
             })
             .then((response) => {
+                const state = {
+                    email: null
+                };
+                debugger
+                if (location.state && location.state.values.email) {
+                    state.email = location.state.values.email;
+                } else {
+                    state.email = values.email;
+                }
                 // toastr.success('Register sucscessful!');
-                navigate("/");
+                navigate("/verify", { state }); //burdan email i gonderessen i fso
             })
             .catch((error) => {
                 // Hata durumunda
