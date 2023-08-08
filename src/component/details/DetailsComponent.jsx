@@ -20,6 +20,8 @@ const DetailsComponent = () => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [replyCommentId, setReplyCommentId] = useState(null);
 
+  const [commentCount, setCommentCount] = useState('');
+
   const [offset, setOffset] = useState(0);
   const [limit, setLimit] = useState(10);
 
@@ -189,6 +191,22 @@ const DetailsComponent = () => {
     </div>
   );
 
+
+  useEffect(() => {
+    const travelDestinationId = id;
+
+    makeApiRequest(`https://travel-guide-backend-7e73c60545d8.herokuapp.com/user_comment/count?travelDestinationId=${travelDestinationId}`, 'GET')
+      .then(response => {
+        console.log('API isteği tamamlandı:', response.data);
+        setCommentCount(response.data);
+
+        console.log(commentCount + "asdasdasdasdasd");
+      })
+      .catch(error => {
+        console.error('Detay alınırken bir hata oluştu:', error);
+      });
+  }, []);
+
   return (
     <div className="details-container">
       <div className="details-image">
@@ -243,7 +261,7 @@ const DetailsComponent = () => {
         </div>
 
         <div className="comments-list">
-          <h2>İstifadəçilərə aid şərhlər</h2>
+          <h2>İstifadəçilərə aid şərhlər ({commentCount})</h2>
           {comments.map((comment) => (
             <div key={comment.id} className="comment">
               <div className="comment-header">
@@ -268,8 +286,10 @@ const DetailsComponent = () => {
                       }}
                       placeholder="Cavabınızı buraya yazın..."
                     />
-                    <div className="reply-button-group">
-                      <button className="reply-button-sum" onClick={() => handleReplySubmit(comment.id, comment.replyMessage)}>
+                    <div className={`reply-button-group ${comment.replyMessage ? '' : 'disabled-button'}`}>
+                      <button className="reply-button-sum"
+                        disabled={comment.replyMessage ? false : true}
+                        onClick={() => handleReplySubmit(comment.id, comment.replyMessage)}>
                         Göndər
                       </button>
                       <button className="cancel-button" onClick={() => handleReplyCancel(comment.id)}>

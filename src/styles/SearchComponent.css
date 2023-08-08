@@ -15,14 +15,11 @@
     overflow: hidden;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     cursor: pointer;
-    /* İçeriklere tıklanabilirlik özelliği ekle */
     transition: transform 0.3s ease-in-out;
-    /* Geçiş animasyonu ekle */
 }
 
 .result-card:hover {
     transform: scale(1.1);
-    /* Kartın büyüklüğünü artır */
 }
 
 .result-image {
@@ -77,7 +74,6 @@
     max-width: 600px;
     animation: popupFadeIn 0.3s ease-in-out;
     text-align: center;
-    /* İçeriği merkeze hizala */
 }
 
 .close-button {
@@ -98,33 +94,11 @@
 }
 
 .active {
-    color: yellow;
+    color: #007bff;
 }
 
 .activeLike {
-    color: blue;
-}
-
-@keyframes popupFadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.8);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-@keyframes popupScale {
-    from {
-        transform: scale(0.8);
-    }
-
-    to {
-        transform: scale(1);
-    }
+    color: #007bff;
 }
 
 .clickable {
@@ -133,7 +107,6 @@
 
 .clickable:hover {
     background-color: #ece9e9;
-    /* Add any other styles you want for the hover effect */
 }
 
 .result-icons {

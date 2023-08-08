@@ -1,12 +1,321 @@
+// import React, { useEffect, useState } from 'react';
+// import '../styles/SearchComponent.css';
+// import $ from 'jquery';
+// import { useNavigate, useLocation } from "react-router-dom";
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faFire, faUtensils, faPlane, faCamera, faMusic, faThumbsUp, faStar } from '@fortawesome/free-solid-svg-icons';
+// import ReactDOM from 'react-dom';
+
+
+// const SearchComponent = () => {
+//     const navigate = useNavigate();
+//     const location = useLocation();
+
+//     const [results, setResults] = useState([]);
+//     const [isStar, setIsStar] = useState(false);
+
+//     const renderIcon = (iconName) => {
+//         switch (iconName) {
+//             case 'Ateş':
+//                 return <FontAwesomeIcon icon={faFire} />;
+//             case 'Yemek':
+//                 return <FontAwesomeIcon icon={faUtensils} />;
+//             case 'Seyahat':
+//                 return <FontAwesomeIcon icon={faPlane} />;
+//             case 'Kamera':
+//                 return <FontAwesomeIcon icon={faCamera} />;
+//             case 'Müzik':
+//                 return <FontAwesomeIcon icon={faMusic} />;
+//             default:
+//                 return null;
+//         }
+//     }
+
+//     useEffect(() => {
+//         $.ajax({
+//             type: "GET",
+//             url: "https://travel-guide-backend-7e73c60545d8.herokuapp.com/travel_place/getAll",
+//             headers: {
+//                 "Authorization": "Bearer " + localStorage.getItem("token")
+//             },
+//             success: function (response) {
+//                 var selectbox = $("#search-select");
+//                 selectbox.empty(); // Selectbox'ı temizle
+
+//                 // API yanıtındaki verileri selectbox'a ekle
+//                 response.forEach(function (city) {
+//                     var option = $("<option></option>").attr("value", city.category).text(city.description);
+//                     selectbox.append(option);
+//                 });
+//             },
+//             error: function (error) {
+//                 console.log(error);
+//             }
+//         });
+//     }, []);
+
+//     const handleCardClick = (rowId, id) => {
+//         const state = {
+//             id: null,
+//         };
+
+//         if (location.state && location.state.id) {
+//             state.id = location.state.id;
+//         } else {
+//             state.id = id;
+//         }
+
+//         navigate(`/details/${rowId}`, { state });
+//     };
+
+//     function checkFavoriteStatus(rowId) {
+//         // Favori durumunu kontrol etmek için backend API'yi çağır
+//         const token = localStorage.getItem("token");
+
+//         fetch(`https://travel-guide-backend-7e73c60545d8.herokuapp.com/star/favorites/check/${rowId}`, {
+//             headers: {
+//                 "Authorization": `Bearer ${token}`
+//             }
+//         })
+//             .then(response => response.json())
+//             .then(data => {
+//                 debugger
+//                 if (data) {
+//                     setIsStar(true)
+//                     // favoriteIcon.classList.add("active");
+//                 }
+//             })
+//             .catch(error => {
+//                 console.error("Favori durumu kontrol edilirken bir hata oluştu:", error);
+//             });
+//     }
+
+
+//     function addFavorite(rowId) {
+//         // Favori ekleme API isteği yap
+//         const token = localStorage.getItem("token");
+
+//         fetch("https://travel-guide-backend-7e73c60545d8.herokuapp.com/star/favorites/add", {
+//             method: "POST",
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 "Authorization": `Bearer ${token}`
+//             },
+//             body: JSON.stringify({ id: rowId })
+//         })
+//             .then(response => response.json())
+//             .then(data => {
+//                 setIsStar(true);
+//                 console.log("Favori eklendi:", data);
+//             })
+//             .catch(error => {
+//                 console.error("Favori eklenirken bir hata oluştu:", error);
+//             });
+//     }
+
+
+//     function deleteFavorite(rowId) {
+//         // Favori silme API isteği yap
+//         const token = localStorage.getItem("token");
+
+//         fetch("https://travel-guide-backend-7e73c60545d8.herokuapp.com/star/favorites/delete", {
+//             method: "DELETE",
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 "Authorization": `Bearer ${token}`
+//             },
+//             body: JSON.stringify({ id: rowId })
+//         })
+//             .then(response => response.json())
+//             .then(data => {
+//                 console.log("Favori silindi:", data);
+//                 setIsStar(false)
+//             })
+//             .catch(error => {
+//                 console.error("Favori silinirken bir hata oluştu:", error);
+//             });
+//     }
+
+
+//     function checkLikeStatus(likeIcon, rowId) {
+//         // Favori durumunu kontrol etmek için backend API'yi çağır
+//         const token = localStorage.getItem("token");
+
+//         fetch(`https://travel-guide-backend-7e73c60545d8.herokuapp.com/like_btn/check/${rowId}`, {
+//             headers: {
+//                 "Authorization": `Bearer ${token}`
+//             }
+//         })
+//             .then(response => response.json())
+//             .then(data => {
+//                 if (data) {
+//                     likeIcon.classList.add("activeLike");
+//                 }
+//             })
+//             .catch(error => {
+//                 console.error("Favori durumu kontrol edilirken bir hata oluştu:", error);
+//             });
+//     }
+
+
+//     function addLike(rowId) {
+//         // Like ekleme API isteği yap
+//         const token = localStorage.getItem("token");
+
+//         fetch("https://travel-guide-backend-7e73c60545d8.herokuapp.com/like_btn/add", {
+//             method: "POST",
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 "Authorization": `Bearer ${token}`
+//             },
+//             body: JSON.stringify({ id: rowId })
+//         })
+//             .then(response => response.json())
+//             .then(data => {
+//                 console.log("Like eklendi:", data);
+//                 const updatedLikeCount = data;
+
+//                 // HTML üzerindeki likeCount değerini güncelle
+//                 const likeCountElement = document.querySelector(`[data-row-id="${rowId}"]`);
+//                 likeCountElement.innerHTML = `<i class="fas fa-thumbs-up"></i> ${updatedLikeCount}`;
+//             })
+//             .catch(error => {
+//                 console.error("Like eklenirken bir hata oluştu:", error);
+//             });
+//     }
+
+//     const testClick = () => {
+//         const token = localStorage.getItem("token");
+//         const selectedOption = document.getElementById("search-select").value;
+//         // HTTP GET isteği yap
+//         fetch(`https://travel-guide-backend-7e73c60545d8.herokuapp.com/travel_destination/get?key=${selectedOption}`, {
+//             headers: {
+//                 "Authorization": `Bearer ${token}`
+//             }
+//         })
+//             .then(response => response.json())
+//             .then(data => {
+//                 setResults(data);
+//             });
+//     }
+
+//     const testStarClick = (rowId) => {
+//         checkFavoriteStatus(rowId)
+//         debugger
+//         if (!isStar) {
+//             addFavorite(rowId)
+//         } else {
+//             deleteFavorite(rowId)
+//         }
+//         console.log("fil")
+//     }
+
+//     function deleteLike(rowId) {
+//         // Delete silme API isteği yap
+//         const token = localStorage.getItem("token");
+
+//         fetch("https://travel-guide-backend-7e73c60545d8.herokuapp.com/like_btn/delete", {
+//             method: "DELETE",
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 "Authorization": `Bearer ${token}`
+//             },
+//             body: JSON.stringify({ id: rowId })
+//         })
+//             .then(response => response.json())
+//             .then(data => {
+//                 console.log("Like silindi:", data);
+//                 const updatedLikeCount = data;
+
+//                 // HTML üzerindeki likeCount değerini güncelle
+//                 const likeCountElement = document.querySelector(`[data-row-id="${rowId}"]`);
+//                 likeCountElement.innerHTML = `<i class="fas fa-thumbs-up"></i> ${updatedLikeCount}`;
+//             })
+//             .catch(error => {
+//                 console.error("Like silinirken bir hata oluştu:", error);
+//             });
+//     }
+
+//     return (
+//         <div class="search-container">
+//             <div class="row">
+//                 <div class="col-md-6 col-md-offset-3">
+//                     <h2>Axtarış et</h2>
+//                     <div class="input-group">
+//                         <select id="search-select" class="form-control">
+//                             <option value=""></option>
+//                         </select>
+//                         <span class="input-group-btn">
+//                             <button id="search-button" onClick={() => testClick()} class="btn btn-primary" type="button">Axtar</button>
+//                         </span>
+//                     </div>
+//                 </div>
+//             </div>
+
+//             <div id="result-container" className="container">
+//                 {results.map((row, index) => (
+//                     <div key={index} className="result-card">
+//                         <div className="result-image">
+//                             <img src={`https://travel-guide-backend-7e73c60545d8.herokuapp.com/image/${row.id}/${row.imageUrl}`} alt={row.destination} />
+//                         </div>
+//                         <div className="result-details">
+//                             <h5 className="result-city">{row.destination}</h5>
+//                             <p className="result-money">Pul: {row.estimatedCost}</p>
+//                             {row.createdByName && (
+//                                 <p className="result-creadet">Yaradıb: {row.createdByName}</p>
+//                             )}
+//                             <div className="result-icons">
+//                                 {row.iconList.map((icon, index) => (
+//                                     <div key={index} className="icon-container">
+//                                         <span title={icon}>{renderIcon(icon)}</span>
+//                                     </div>
+//                                 ))}
+//                             </div>
+//                             <span className="likeIconD" data-row-id={row.id} title="Bəyən">
+//                                 <FontAwesomeIcon icon={faThumbsUp} /> {row.likeCount}
+//                             </span>
+//                             <span className="favorite" data-row-id={row.id} title="Ulduz" onClick={() => testStarClick(row.id)}>
+//                                 <FontAwesomeIcon icon={faStar} />
+//                             </span>
+//                         </div>
+//                     </div>
+//                 ))}
+//             </div>
+//         </div>
+//     );
+// };
+
+// export default SearchComponent;
 import React, { useEffect } from 'react';
 import '../styles/SearchComponent.css';
 import $ from 'jquery';
 import { useNavigate, useLocation } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFire, faUtensils, faPlane, faCamera, faMusic } from '@fortawesome/free-solid-svg-icons';
+import ReactDOM from 'react-dom';
 
 
 const SearchComponent = () => {
     const navigate = useNavigate();
     const location = useLocation();
+
+    const renderIcon = (iconName) => {
+        switch (iconName) {
+            case 'Ateş':
+                return <FontAwesomeIcon icon={faFire} />;
+            case 'Yemek':
+                return <FontAwesomeIcon icon={faUtensils} />;
+            case 'Seyahat':
+                return <FontAwesomeIcon icon={faPlane} />;
+            case 'Kamera':
+                return <FontAwesomeIcon icon={faCamera} />;
+            case 'Müzik':
+                return <FontAwesomeIcon icon={faMusic} />;
+            default:
+                return null;
+        }
+    }
+
     useEffect(() => {
         const searchButton = document.getElementById("search-button");
         searchButton.addEventListener("click", () => {
@@ -66,6 +375,37 @@ const SearchComponent = () => {
                             resultDetails.appendChild(credateBy);
                         }
 
+                        // Vanilla JavaScript code:
+                        const resultIconsDiv = document.createElement("div");
+                        resultIconsDiv.classList.add("result-icons");
+
+                        row.iconList.forEach((icon, index) => {
+                            const iconContainerDiv = document.createElement("div");
+                            iconContainerDiv.classList.add("icon-container");
+
+                            const iconSpan = document.createElement("span");
+                            iconSpan.setAttribute("title", icon);
+                            const iconElement = renderIcon(icon);
+                            if (iconElement) {
+                                // Create a temporary div for React rendering
+                                const tempDiv = document.createElement("div");
+
+                                // Render the FontAwesomeIcon using ReactDOM.render
+                                ReactDOM.render(iconElement, tempDiv);
+
+                                // Get the rendered React component as a DOM element
+                                const renderedIcon = tempDiv.firstChild;
+
+                                // Append the rendered icon to the iconSpan
+                                iconSpan.appendChild(renderedIcon);
+                            }
+
+                            iconContainerDiv.appendChild(iconSpan);
+                            resultIconsDiv.appendChild(iconContainerDiv);
+                        });
+
+                        resultDetails.appendChild(resultIconsDiv);
+
                         const likeIcon = document.createElement("span");
                         likeIcon.classList.add("likeIconD");
                         likeIcon.innerHTML = `<i class="fas fa-thumbs-up"></i> ${likeCount}`;
@@ -82,6 +422,7 @@ const SearchComponent = () => {
 
                         likeIcon.classList.add("clickable");
                         favoriteIcon.classList.add("clickable");
+
 
                         resultContainer.appendChild(resultCard);
 

@@ -1,0 +1,67 @@
+/* Stil seçenekleri */
+.filter-options {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.filter-option {
+    position: relative;
+    padding: 3px 10px;
+    border: 2px solid #007BFF;
+    background-color: #F8F9FA;
+    color: #007BFF;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, transform 0.2s, border-color 0.3s;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filter-option .count {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    padding: 6px 10px;
+    background-color: #007BFF;
+    color: #FFF;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 50%;
+}
+
+.filter-option:hover {
+    background-color: #007BFF;
+    color: #FFF;
+    transform: translateY(-2px);
+}
+
+/* Seçili seçeneği görselleştirme */
+.filter-option.active {
+    background-color: #FF7B00;
+    color: #FFF;
+    transform: scale(1.05) translateY(-2px);
+    border-color: #FF7B00;
+}
+
+.filter-option.active .count {
+    background-color: #FFF;
+    color: #FF7B00;
+}
+
+/* Aralardaki boşlukları ayarlama */
+.filter-option:not(:first-child) {
+    margin-left: 12px;
+}
+
+/* Düğme boyutlarını ayarlama */
+@media (max-width: 480px) {
+    .filter-option {
+        padding: 8px 16px;
+        font-size: 12px;
+        border-radius: 15px;
+    }
+}

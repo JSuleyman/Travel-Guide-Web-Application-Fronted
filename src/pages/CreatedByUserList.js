@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/SearchComponent.css';
+import '../styles/CreatedByUserList.css';
 import { useNavigate, useLocation } from 'react-router-dom';
 import makeApiRequest from '../api/makeApiRequest';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -90,29 +91,25 @@ const CreatedByUserList = () => {
             <div id="result-container" className="container">
                 <div className="filter-options">
                     <button
-                        style={filter === '' ? { backgroundColor: '#555', color: '#fff' } : null}
-                        className="filter-option"
+                        className={`filter-option ${filter === '' ? 'active' : ''}`}
                         onClick={() => handleFilterClick('')}
                     >
                         Hamısı ({allCount})
                     </button>
                     <button
-                        style={filter === 'COMPLETED' ? { backgroundColor: '#555', color: '#fff' } : null}
-                        className="filter-option"
+                        className={`filter-option ${filter === 'COMPLETED' ? 'active' : ''}`}
                         onClick={() => handleFilterClick('COMPLETED')}
                     >
                         İcra Edilib ({completedCount})
                     </button>
                     <button
-                        style={filter === 'PENDING' ? { backgroundColor: '#555', color: '#fff' } : null}
-                        className="filter-option"
+                        className={`filter-option ${filter === 'PENDING' ? 'active' : ''}`}
                         onClick={() => handleFilterClick('PENDING')}
                     >
                         Gözləmədə ({pendingCount})
                     </button>
                     <button
-                        style={filter === 'APPROVED' ? { backgroundColor: '#555', color: '#fff' } : null}
-                        className="filter-option"
+                        className={`filter-option ${filter === 'APPROVED' ? 'active' : ''}`}
                         onClick={() => handleFilterClick('APPROVED')}
                     >
                         Ləğv Edilib ({approvedCount})
