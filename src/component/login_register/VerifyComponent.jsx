@@ -48,12 +48,10 @@ const VerifyComponent = ({ setAuth }) => {
                 navigate("/");
             })
             .catch((error) => {
-                // Hata durumunda
-                if (error.response && error.response.data && error.response.data.message) {
-                    const errorMessage = error.response.data.message;
-                    console.log(errorMessage);
-                    toast.error(errorMessage);
-                } else {
+                if (error.response.data.errorMessage) {
+                    toast.error(error.response.data.errorMessage);
+                } 
+                else {
                     console.log("An error occurred:", error.message);
                     toast.error("An error occurred");
                 }
@@ -108,7 +106,7 @@ const VerifyComponent = ({ setAuth }) => {
                         </LoadingButton>
                     </Box>
 
-                    <Test email={email}/>
+                    <Test email={email} />
                 </Stack>
             </Form>
             <div>

@@ -16,6 +16,7 @@ import IconList from './component/custom_card/IconList';
 import VerifyComponent from './component/login_register/VerifyComponent';
 import Verify from './pages/Verify';
 import Test from './component/login_register/RepeadVerified';
+import ForgetPasswordPage from './component/forget_password/ForgetPasswordPage';
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -53,6 +54,8 @@ const App = () => {
         {loggedIn && <Route path="/my_profile" element={<UserProfile />} />}
         {loggedIn && <Route path="/change_password" element={<ChangePassword />} />}
         {loggedIn && <Route path="/change_full_name" element={<ChangeFullName />} />}
+        {!loggedIn && <Route path="/forget_password" element={<ForgetPasswordPage />} />}
+        {/* {!loggedIn && <Route path="/forget_password:token" element={<ForgetPasswordPage />} />} */}
       </Routes>
     </div>
   );

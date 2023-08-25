@@ -67,10 +67,11 @@ const DetailsComponent = () => {
         .then(response => {
           console.log('Yorum gönderildi:', response.data);
           setuserinYazdigiYorum('');
+          setOffset(0);
           userCommentsList();
-          if (isHasData === false) {
-            window.location.reload();
-          }
+          // if (isHasData === false) {
+          //   window.location.reload();
+          // }
         })
         .catch(error => {
           console.error('Yorum gönderilirken bir hata oluştu:', error);
@@ -205,7 +206,7 @@ const DetailsComponent = () => {
       .catch(error => {
         console.error('Detay alınırken bir hata oluştu:', error);
       });
-  }, []);
+  }, [comments]);
 
   return (
     <div className="details-container">
