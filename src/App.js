@@ -17,6 +17,8 @@ import VerifyComponent from './component/login_register/VerifyComponent';
 import Verify from './pages/Verify';
 import Test from './component/login_register/RepeadVerified';
 import ForgetPasswordPage from './component/forget_password/ForgetPasswordPage';
+import QuestionAnswer from './component/travel_plan/QuestionAnswer';
+import WalletManagement from './component/wallet_management/WalletManagement';
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -48,7 +50,9 @@ const App = () => {
         {loggedIn && <Route path="/favorites" element={<FavoritesComponent />} />}
         {loggedIn && <Route path="/details/:id" element={<DetailsComponent />} />}
         {loggedIn && <Route path="/custom_card" element={<CustomCard />} />}
+        {loggedIn && <Route path="/question" element={<QuestionAnswer />} />}
         {loggedIn && <Route path="/my_cards" element={<CreatedByUserList />} />}
+        {loggedIn && <Route path="/wallet_management" element={<WalletManagement />} />}
         {!loggedIn && <Route path="/signup" element={<Register />} />}
         {!loggedIn && <Route path="/verify" element={<Verify />} />}
         {loggedIn && <Route path="/my_profile" element={<UserProfile />} />}

@@ -29,47 +29,47 @@ const ProfileDropdown = ({ onLogout }) => {
   };
 
   const fetchNotifications = async () => {
-    try {
-      const response = await makeApiRequest(
-        "https://travel-guide-backend-7e73c60545d8.herokuapp.com/notification",
-        "GET"
-      );
-      console.log("API isteği tamamlandı:", response.data);
-      setNotifications(response.data);
-    } catch (error) {
-      console.error("Favoriler alınırken bir hata oluştu:", error);
-    }
+    // try {
+    //   const response = await makeApiRequest(
+    //     "https://travel-guide-backend-7e73c60545d8.herokuapp.com/notification",
+    //     "GET"
+    //   );
+    //   console.log("API isteği tamamlandı:", response.data);
+    //   setNotifications(response.data);
+    // } catch (error) {
+    //   console.error("Favoriler alınırken bir hata oluştu:", error);
+    // }
   };
-  useEffect(() => {
-    // Make initial API call upon login
-    fetchNotifications();
+  // useEffect(() => {
+  //   // Make initial API call upon login
+  //   fetchNotifications();
 
-    // Set interval to fetch notifications every 3 seconds
-    const interval = setInterval(fetchNotifications, 3000);
+  //   // Set interval to fetch notifications every 3 seconds
+  //   const interval = setInterval(fetchNotifications, 3000);
 
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
+  //   return () => {
+  //     clearInterval(interval);
+  //   };
+  // }, []);
 
-  const toggleNotification = () => {
-    setShowNotification((prevState) => {
-      if (prevState) {
-        makeApiRequest(
-          "https://travel-guide-backend-7e73c60545d8.herokuapp.com/notification",
-          "POST"
-        )
-          .then((response) => {
-            fetchNotifications();
-            console.log("API isteği tamamlandı:", response.data);
-          })
-          .catch((error) => {
-            console.error("API isteği sırasında bir hata oluştu:", error);
-          });
-      }
-      return !prevState;
-    });
-  };
+  // const toggleNotification = () => {
+  //   setShowNotification((prevState) => {
+  //     if (prevState) {
+  //       makeApiRequest(
+  //         "https://travel-guide-backend-7e73c60545d8.herokuapp.com/notification",
+  //         "POST"
+  //       )
+  //         .then((response) => {
+  //           fetchNotifications();
+  //           console.log("API isteği tamamlandı:", response.data);
+  //         })
+  //         .catch((error) => {
+  //           console.error("API isteği sırasında bir hata oluştu:", error);
+  //         });
+  //     }
+  //     return !prevState;
+  //   });
+  // };
 
 
   return (
@@ -102,6 +102,11 @@ const ProfileDropdown = ({ onLogout }) => {
           </Link>
         </li>
         <li className="list-item">
+          <Link to="/wallet_management" className="link-light">
+            Maliyyə Nəzarəti
+          </Link>
+        </li>
+        <li className="list-item">
           <Link to="/my_profile" className="link-light">
             Profil
           </Link>
@@ -112,7 +117,8 @@ const ProfileDropdown = ({ onLogout }) => {
       </ul>
 
       <div className="notification-container">
-        <button className="notification-button" onClick={toggleNotification}>
+        {/* <button className="notification-button" onClick={toggleNotification}> */}
+        <button className="notification-button">
           Bildirimlər ({notifications.length})
         </button>
         {showNotification && (
