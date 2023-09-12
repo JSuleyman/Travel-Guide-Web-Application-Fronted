@@ -11,6 +11,11 @@ function WelcomeWalletManagement({ data }) {
     const [moneyLeft, setMoneyLeft] = useState(data.moneyLeft);
     const [totalMoney, settotalMoney] = useState(data.totalMoney);
 
+    // const [currencies, setCurrencies] = useState([]);
+    // const [selectedCurrency, setSelectedCurrency] = useState("");
+
+
+
     const handleExpenseDescriptionChange = (event) => {
         setExpenseDescription(event.target.value);
     };
@@ -27,7 +32,8 @@ function WelcomeWalletManagement({ data }) {
         // Yeni gider nesnesini oluşturun ve mevcut giderler dizisini güncelleyin
         const newExpense = {
             costDescription: expenseDescription,
-            cost: parseFloat(expenseAmount), // Gider miktarını sayıya dönüştürün
+            cost: parseFloat(expenseAmount),
+            // currencyId: selectedCurrency  // Gider miktarını sayıya dönüştürün
         };
 
         setExpenses([...expenses, newExpense]);
@@ -51,6 +57,7 @@ function WelcomeWalletManagement({ data }) {
         // Gider açıklaması ve miktarını sıfırlayın
         setExpenseDescription("");
         setExpenseAmount("");
+        // setSelectedCurrency("");
     };
 
     useEffect(() => {
@@ -63,22 +70,61 @@ function WelcomeWalletManagement({ data }) {
             });
     }, []);
 
+    const handleDeleteExpense = (id) => {
+        // İlgili gideri listeden kaldırın
+
+        makeApiRequest(`https://travel-guide-backend-7e73c60545d8.herokuapp.com/wallet_management/delete_cost?id=${id}`, "POST")
+            .then(response => {
+                setMoneyLeft(response.data.moneyLeft);
+                makeApiRequest('https://travel-guide-backend-7e73c60545d8.herokuapp.com/wallet_management/cost_list', 'GET')
+                    .then(response => {
+                        setCostList(response.data);
+                    })
+                    .catch(error => {
+                        // Hata durumunu ele alabilirsiniz
+                    });
+            })
+            .catch(error => {
+
+            })
+
+        console.log("id: " + id)
+    };
+
+    const resetUserWalletWithConfirmation = () => {
+        const confirmation = window.confirm("Cüzdanı sıfırlamak istediğinizden emin misiniz?");
+        if (confirmation) {
+            makeApiRequest("https://travel-guide-backend-7e73c60545d8.herokuapp.com/wallet_management/reset_wallet", "DELETE")
+                .then(response => {
+                    window.location.reload();
+                })
+                .catch(error => {
+                    // Hata durumunu ele alabilirsiniz
+                });
+        }
+    }
+    
+
+    // useEffect(() => {
+    //     // Valyuta bilgilerini getiren API isteği
+    //     makeApiRequest('https://travel-guide-backend-7e73c60545d8.herokuapp.com/wallet_management/currencies', 'GET')
+    //         .then(response => {
+    //             // API'den gelen valyuta bilgilerini state'e kaydedin
+    //             setCurrencies(response.data);
+    //         })
+    //         .catch(error => {
+    //             // Hata durumunu ele alabilirsiniz
+    //         });
+    // }, []);
+
     return (
         <div className="wallet-management-welcome">
-            <h2>Xos geldin</h2>
-            <div>
+            <div className="money-info">
                 <p>Total money: {totalMoney}</p>
                 <p>Left money: {moneyLeft}</p>
+                <button onClick={resetUserWalletWithConfirmation}>Reset</button>
             </div>
-            <div>
-                <h3>Giderler</h3>
-                <ul>
-                    {costList.map((expense, index) => (
-                        <li key={index}>
-                            {expense.costDescription}: {expense.cost} AZN
-                        </li>
-                    ))}
-                </ul>
+            <div className="expense-form">
                 <input
                     type="text"
                     placeholder="Gider açıklaması"
@@ -91,8 +137,36 @@ function WelcomeWalletManagement({ data }) {
                     value={expenseAmount}
                     onChange={handleExpenseAmountChange}
                 />
-                <button onClick={addExpense}>Ekle</button>
+                {/* <select
+                    name="currency"
+                    id="currency"
+                    value={selectedCurrency}
+                    onChange={(e) => setSelectedCurrency(e.target.value)}
+                >
+                    <option value="">Valyuta seçin</option>
+                    {currencies.map((currency) => (
+                        <option key={currency.id} value={currency.id}>
+                            {currency.currency}
+                        </option>
+                    ))}
+                </select> */}
+                {/* <br /> */}
+                <button className='welcome-wallet-button' onClick={addExpense}>Ekle</button>
             </div>
+
+            <br />
+
+            <h3>Giderler</h3>
+            <ul className="expense-list">
+                {costList.map((expense, index) => (
+                    <li className="expense-item" key={index}>
+                        <span className="expense-description">
+                            {expense.costDescription}: {expense.cost} {expense.currency}
+                        </span>
+                        <button className="delete-button" onClick={() => handleDeleteExpense(expense.id)}>Sil</button>
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 }
