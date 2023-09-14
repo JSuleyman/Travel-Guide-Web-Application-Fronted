@@ -7,10 +7,9 @@ import './WalletManagement.css'
 function WalletManagement() {
     const [data, setData] = useState("");
     const [showCreateWallet, setShowCreateWallet] = useState(false);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        setLoading(true);
         makeApiRequest('https://travel-guide-backend-7e73c60545d8.herokuapp.com/wallet_management/is_have_total_money', 'GET')
             .then(response => {
                 setData(response.data);
@@ -38,7 +37,7 @@ function WalletManagement() {
                     showCreateWallet ? (
                         <CreateWalletManagement onSubmission={handleCreateWalletSubmission} />
                     ) : (
-                        <button onClick={() => setShowCreateWallet(true)}>Create Wallet</button>
+                        <button onClick={() => setShowCreateWallet(true)}>Pul Kisənizi İdarə Edin</button>
                     )
                 )
             )}

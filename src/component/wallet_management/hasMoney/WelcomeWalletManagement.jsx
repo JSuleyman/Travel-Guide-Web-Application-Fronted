@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './Modul.css';
 import makeApiRequest from '../../../api/makeApiRequest';
+import { formatDateTime } from '../../../utils/formatDateTime';
+import ExpenseSummary from './ExpenseSummary';
+import TotalMoneyExpenseInput from './TotalMoneyExpenseInput';
 
 
 function WelcomeWalletManagement({ data }) {
@@ -103,7 +106,6 @@ function WelcomeWalletManagement({ data }) {
                 });
         }
     }
-    
 
     // useEffect(() => {
     //     // Valyuta bilgilerini getiren API isteği
@@ -117,23 +119,31 @@ function WelcomeWalletManagement({ data }) {
     //         });
     // }, []);
 
+    const handleMoneyLeftChange = (newMoneyLeft, totalMoney) => {
+        // moneyLeft değerini güncelle
+        setMoneyLeft(newMoneyLeft);
+        settotalMoney(totalMoney)
+        // API çağrısı yapabilirsiniz (isteğe bağlı)
+    };
+
     return (
         <div className="wallet-management-welcome">
             <div className="money-info">
-                <p>Total money: {totalMoney}</p>
-                <p>Left money: {moneyLeft}</p>
-                <button onClick={resetUserWalletWithConfirmation}>Reset</button>
+                <TotalMoneyExpenseInput initialTotalMoney={totalMoney} onMoneyLeftChange={handleMoneyLeftChange} />
+                <p>Xərclənən məbləğ: {(totalMoney - moneyLeft).toFixed(2)} ₼</p>
+                <p>Qalan məbləğ: {moneyLeft} ₼</p>
+                <button className="reset_button" onClick={resetUserWalletWithConfirmation}>Sıfırla</button>
             </div>
             <div className="expense-form">
                 <input
                     type="text"
-                    placeholder="Gider açıklaması"
+                    placeholder="Xərc açıqlaması"
                     value={expenseDescription}
                     onChange={handleExpenseDescriptionChange}
                 />
                 <input
                     type="number"
-                    placeholder="Gider miktarı"
+                    placeholder="Xərc açıqlaması"
                     value={expenseAmount}
                     onChange={handleExpenseAmountChange}
                 />
@@ -151,21 +161,23 @@ function WelcomeWalletManagement({ data }) {
                     ))}
                 </select> */}
                 {/* <br /> */}
-                <button className='welcome-wallet-button' onClick={addExpense}>Ekle</button>
+                <button className='welcome-wallet-button' onClick={addExpense}>Əlavə et</button>
             </div>
 
             <br />
 
-            <h3>Giderler</h3>
+            <h3>Xərclər siyahısı</h3>
             <ul className="expense-list">
                 {costList.map((expense, index) => (
                     <li className="expense-item" key={index}>
                         <span className="expense-description">
-                            {expense.costDescription}: {expense.cost} {expense.currency}
+                            {expense.costDescription}: {expense.cost} {expense.currency} ₼ ({formatDateTime(expense.localDateTime)})
                         </span>
                         <button className="delete-button" onClick={() => handleDeleteExpense(expense.id)}>Sil</button>
                     </li>
                 ))}
+                {console.log("Dataaaa :" + costList)}
+                <ExpenseSummary data={costList} />
             </ul>
         </div>
     );

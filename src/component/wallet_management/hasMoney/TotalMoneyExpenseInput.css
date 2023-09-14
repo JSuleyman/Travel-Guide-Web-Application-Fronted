@@ -1,0 +1,35 @@
+.total-money-expense-input {
+    margin-bottom: 20px;
+}
+
+.money-input {
+    width: 100px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #333;
+    /* Yeni renk seçimi, örneğin gri bir renk (#333) */
+}
+
+.money-amount {
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+.save-button,
+.cancel-button,
+.edit-button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.save-button:hover,
+.cancel-button:hover,
+.edit-button:hover {
+    background-color: #2980b9;
+}

@@ -27,9 +27,9 @@ function CreateWalletManagement({ onSubmission }) {
 
     return (
         <div className="wallet-management">
-            <h2>Pulunuzu İdare Edin</h2>
+            <h2>Pul Kisənizi İdarə Edin</h2>
             <div className="input-container">
-                <label htmlFor="totalMoney">Total Money:</label>
+                <label htmlFor="totalMoney">Toplam Məbləğ:</label>
                 <input
                     type="number"
                     id="totalMoney"
@@ -39,7 +39,7 @@ function CreateWalletManagement({ onSubmission }) {
                 />
             </div>
             <div className="button-container">
-                <button type='submit' onClick={sendTotalMoney}>Submit</button>
+                <button type='submit' onClick={sendTotalMoney}>Göndər</button>
             </div>
         </div>
     );

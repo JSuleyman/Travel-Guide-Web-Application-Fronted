@@ -1,0 +1,14 @@
+.expense-summary {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    background-color: #f7f7f7;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.expense-difference {
+    font-size: 24px;
+    color: #3498db;
+    margin-top: 5px;
+}
