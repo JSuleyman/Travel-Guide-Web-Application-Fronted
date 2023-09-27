@@ -111,3 +111,8 @@
     font-size: 14px;
     margin-top: 5px;
 }
+
+
+.menu-selected {
+    border-bottom: 2px solid blue;
+}

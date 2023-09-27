@@ -4,6 +4,8 @@ import makeApiRequest from '../../../api/makeApiRequest';
 import { formatDateTime } from '../../../utils/formatDateTime';
 import ExpenseSummary from './ExpenseSummary';
 import TotalMoneyExpenseInput from './TotalMoneyExpenseInput';
+import { ToastContainer, toast } from 'react-toastify';
+// import DateRangeFilter from './DateRangeFilter';
 
 
 function WelcomeWalletManagement({ data }) {
@@ -13,6 +15,7 @@ function WelcomeWalletManagement({ data }) {
     const [costList, setCostList] = useState([]);
     const [moneyLeft, setMoneyLeft] = useState(data.moneyLeft);
     const [totalMoney, settotalMoney] = useState(data.totalMoney);
+    // const [filteredDates, setFilteredDates] = useState({ startDate: null, endDate: null });
 
     // const [currencies, setCurrencies] = useState([]);
     // const [selectedCurrency, setSelectedCurrency] = useState("");
@@ -44,22 +47,22 @@ function WelcomeWalletManagement({ data }) {
         console.log("asdad" + newExpense)
         makeApiRequest("https://travel-guide-backend-7e73c60545d8.herokuapp.com/wallet_management/cost", "POST", newExpense)
             .then(response => {
+                setExpenseDescription("");
+                setExpenseAmount("");
                 setMoneyLeft(response.data.moneyLeft)
                 makeApiRequest('https://travel-guide-backend-7e73c60545d8.herokuapp.com/wallet_management/cost_list', 'GET')
                     .then(response => {
                         setCostList(response.data);
                     })
                     .catch(error => {
-                        // Hata durumunu ele alabilirsiniz
+
                     });
             })
             .catch(error => {
-
+                toast.error(error.response.data.errorMessage);
             })
 
         // Gider açıklaması ve miktarını sıfırlayın
-        setExpenseDescription("");
-        setExpenseAmount("");
         // setSelectedCurrency("");
     };
 
@@ -126,6 +129,18 @@ function WelcomeWalletManagement({ data }) {
         // API çağrısı yapabilirsiniz (isteğe bağlı)
     };
 
+    // const handleDateFilter = (startDate, endDate) => {
+    //     // Filtreleme işlemlerini burada gerçekleştirin.
+    //     // Örnek olarak, startDate ve endDate'i kullanarak verileri filtreleyebilirsiniz.
+    //     setFilteredDates({ startDate, endDate });
+
+    //     makeApiRequest("https://travel-guide-backend-7e73c60545d8.herokuapp.com/wallet_management/date_filter", "GET", { filteredDates })
+    //         .then(response => {
+    //             setCostList(response.data);
+    //             console.log("Date Filter: " + response.data);
+    //         })
+    // };
+
     return (
         <div className="wallet-management-welcome">
             <div className="money-info">
@@ -166,6 +181,8 @@ function WelcomeWalletManagement({ data }) {
 
             <br />
 
+            {/* <DateRangeFilter onDateFilter={handleDateFilter} /> */}
+
             <h3>Xərclər siyahısı</h3>
             <ul className="expense-list">
                 {costList.map((expense, index) => (
@@ -179,6 +196,9 @@ function WelcomeWalletManagement({ data }) {
                 {console.log("Dataaaa :" + costList)}
                 <ExpenseSummary data={costList} />
             </ul>
+            <div>
+                <ToastContainer />
+            </div>
         </div>
     );
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./index.css";
 import makeApiRequest from "../../api/makeApiRequest";
 import { useNavigate } from "react-router-dom";
@@ -81,39 +81,71 @@ const ProfileDropdown = ({ onLogout }) => {
       </div>
 
       <ul className="middle-items">
+
         <li className="list-item">
-          <Link to="/search" className="link-light">
+          <NavLink
+            to="/search"
+            className="link-light"
+            activeClassName="selected" // Etkin sayfa için eklenen sınıf
+          >
             Axtar
-          </Link>
+          </NavLink>
         </li>
+
         <li className="list-item">
-          <Link to="/favorites" className="link-light">
+          <NavLink
+            to="/favorites"
+            className="link-light"
+            activeClassName="selected" // Etkin sayfa için eklenen sınıf
+          >
             Sevimlilər
-          </Link>
+          </NavLink>
         </li>
+
         <li className="list-item">
-          <Link to="/custom_card" className="link-light">
+          <NavLink
+            to="/custom_card"
+            className="link-light"
+            activeClassName="selected" // Etkin sayfa için eklenen sınıf
+          >
             Xüsusi kart yarat
-          </Link>
+          </NavLink>
         </li>
+
         <li className="list-item">
-          <Link to="/my_cards" className="link-light">
+          <NavLink
+            to="/my_cards"
+            className="link-light"
+            activeClassName="selected" // Etkin sayfa için eklenen sınıf
+          >
             Yaratdıqlarım
-          </Link>
+          </NavLink>
         </li>
+
         <li className="list-item">
-          <Link to="/wallet_management" className="link-light">
+          <NavLink
+            to="/wallet_management"
+            className="link-light"
+            activeClassName="selected" // Etkin sayfa için eklenen sınıf
+          >
             Maliyyə Nəzarəti
-          </Link>
+          </NavLink>
         </li>
+
         <li className="list-item">
-          <Link to="/my_profile" className="link-light">
+          <NavLink
+            to="/my_profile"
+            className="link-light"
+            activeClassName="selected" // Etkin sayfa için eklenen sınıf
+          >
             Profil
-          </Link>
+          </NavLink>
         </li>
+
         <li className="list-item" onClick={handleLogout}>
           <Link className="link-light">Çıxış</Link>
         </li>
+        
       </ul>
 
       <div className="notification-container">
