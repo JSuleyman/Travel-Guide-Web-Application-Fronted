@@ -86,7 +86,7 @@ const ProfileDropdown = ({ onLogout }) => {
           <NavLink
             to="/search"
             className="link-light"
-            activeClassName="selected" // Etkin sayfa için eklenen sınıf
+            activeClassName="selected"
           >
             Axtar
           </NavLink>
@@ -96,7 +96,7 @@ const ProfileDropdown = ({ onLogout }) => {
           <NavLink
             to="/favorites"
             className="link-light"
-            activeClassName="selected" // Etkin sayfa için eklenen sınıf
+            activeClassName="selected"
           >
             Sevimlilər
           </NavLink>
@@ -106,7 +106,7 @@ const ProfileDropdown = ({ onLogout }) => {
           <NavLink
             to="/custom_card"
             className="link-light"
-            activeClassName="selected" // Etkin sayfa için eklenen sınıf
+            activeClassName="selected"
           >
             Xüsusi kart yarat
           </NavLink>
@@ -116,7 +116,7 @@ const ProfileDropdown = ({ onLogout }) => {
           <NavLink
             to="/my_cards"
             className="link-light"
-            activeClassName="selected" // Etkin sayfa için eklenen sınıf
+            activeClassName="selected"
           >
             Yaratdıqlarım
           </NavLink>
@@ -126,7 +126,7 @@ const ProfileDropdown = ({ onLogout }) => {
           <NavLink
             to="/wallet_management"
             className="link-light"
-            activeClassName="selected" // Etkin sayfa için eklenen sınıf
+            activeClassName="selected"
           >
             Maliyyə Nəzarəti
           </NavLink>
@@ -134,9 +134,19 @@ const ProfileDropdown = ({ onLogout }) => {
 
         <li className="list-item">
           <NavLink
+            to="/question"
+            className="link-light"
+            activeClassName="selected"
+          >
+            Səyahət planı tərtib edin 
+          </NavLink>
+        </li>
+
+        <li className="list-item">
+          <NavLink
             to="/my_profile"
             className="link-light"
-            activeClassName="selected" // Etkin sayfa için eklenen sınıf
+            activeClassName="selected"
           >
             Profil
           </NavLink>

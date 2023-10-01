@@ -37,7 +37,9 @@ function WalletManagement() {
                     showCreateWallet ? (
                         <CreateWalletManagement onSubmission={handleCreateWalletSubmission} />
                     ) : (
-                        <button onClick={() => setShowCreateWallet(true)}>Pul Kisənizi İdarə Edin</button>
+                        <button className="create-wallet-button" onClick={() => setShowCreateWallet(true)}>
+                            Pul Kisənizi İdarə Edin
+                        </button>
                     )
                 )
             )}

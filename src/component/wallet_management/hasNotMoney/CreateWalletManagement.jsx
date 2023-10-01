@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Modul.css';
 import makeApiRequest from '../../../api/makeApiRequest';
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
 
 function CreateWalletManagement({ onSubmission }) {
     const [totalMoney, setTotalMoney] = useState("");
@@ -12,6 +13,11 @@ function CreateWalletManagement({ onSubmission }) {
     };
 
     const sendTotalMoney = () => {
+        if (totalMoney.length === 0) {
+            toast.info("Toplam məbləğ daxil edilməyib!");
+            return;
+        }
+
         makeApiRequest('https://travel-guide-backend-7e73c60545d8.herokuapp.com/wallet_management/total_money', 'POST', { totalMoney })
             .then(response => {
                 setTotalMoney('');
@@ -40,6 +46,10 @@ function CreateWalletManagement({ onSubmission }) {
             </div>
             <div className="button-container">
                 <button type='submit' onClick={sendTotalMoney}>Göndər</button>
+            </div>
+
+            <div>
+                <ToastContainer />
             </div>
         </div>
     );

@@ -5,6 +5,8 @@ import { formatDateTime } from '../../../utils/formatDateTime';
 import ExpenseSummary from './ExpenseSummary';
 import TotalMoneyExpenseInput from './TotalMoneyExpenseInput';
 import { ToastContainer, toast } from 'react-toastify';
+import ImageGallery from '../../../img/ImageGallery';
+import axios from 'axios';
 // import DateRangeFilter from './DateRangeFilter';
 
 
@@ -15,6 +17,8 @@ function WelcomeWalletManagement({ data }) {
     const [costList, setCostList] = useState([]);
     const [moneyLeft, setMoneyLeft] = useState(data.moneyLeft);
     const [totalMoney, settotalMoney] = useState(data.totalMoney);
+    const [shouldResetImages, setShouldResetImages] = useState(false);
+    const [selectedImage, setSelectedImage] = useState([]);
     // const [filteredDates, setFilteredDates] = useState({ startDate: null, endDate: null });
 
     // const [currencies, setCurrencies] = useState([]);
@@ -57,6 +61,31 @@ function WelcomeWalletManagement({ data }) {
                     .catch(error => {
 
                     });
+
+                // asdasdknjaklsd
+
+                console.log(response);
+                const expenseId = response.data.expenseId;
+
+                const formData = new FormData();
+                console.log("bilmirem: " + selectedImage);
+                selectedImage.forEach((image) => {
+                    formData.append("image", image);
+                });
+
+                const token = localStorage.getItem('token');
+
+                axios.post(`https://travel-guide-backend-7e73c60545d8.herokuapp.com/sales_receipt/${expenseId}`, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+                    .catch(error => {
+                        // makeApiRequest(`https://travel-guide-backend-7e73c60545d8.herokuapp.com/travel_destination/delete/${expenseId}`, 'DELETE')
+                    });
+                setSelectedImage([]);
+                setShouldResetImages(true);
             })
             .catch(error => {
                 toast.error(error.response.data.errorMessage);
@@ -141,6 +170,44 @@ function WelcomeWalletManagement({ data }) {
     //         })
     // };
 
+    const handleImageSelect = (image) => {
+        setSelectedImage([...selectedImage, image]);
+    };
+
+    const handleImageDelete = (deletedImage) => {
+        const updatedSelectedImages = selectedImage.filter(image => image !== deletedImage);
+        setSelectedImage(updatedSelectedImages);
+    };
+
+    const handleViewImage = (expenseId) => {
+        // Yeni bir pencere aç
+        const popupWindow = window.open('', 'ImagePopup', 'width=600,height=400');
+
+        // Pencerenin içeriğini oluştur
+        const popupContent = `
+            <html>
+                <head>
+                    <title>Resim</title>
+                </head>
+                <body style="text-align:center;">
+                    <img 
+                    src="https://travel-guide-backend-7e73c60545d8.herokuapp.com/sales_receipt/${expenseId}" 
+                    alt="Resim" style="max-width:100%; max-height:100%;" />
+                </body>
+            </html>
+        `;
+
+        // Pencerenin içeriğini ayarla
+        popupWindow.document.open();
+        popupWindow.document.write(popupContent);
+        popupWindow.document.close();
+
+        // Pencereyi odakla (isteğe bağlı)
+        popupWindow.focus();
+    }
+
+
+
     return (
         <div className="wallet-management-welcome">
             <div className="money-info">
@@ -161,6 +228,12 @@ function WelcomeWalletManagement({ data }) {
                     placeholder="Xərc açıqlaması"
                     value={expenseAmount}
                     onChange={handleExpenseAmountChange}
+                />
+
+                <ImageGallery
+                    onImageSelect={handleImageSelect}
+                    onDeleteImage={handleImageDelete}
+                    shouldResetImages={shouldResetImages}
                 />
                 {/* <select
                     name="currency"
@@ -190,6 +263,10 @@ function WelcomeWalletManagement({ data }) {
                         <span className="expense-description">
                             {expense.costDescription}: {expense.cost} {expense.currency} ₼ ({formatDateTime(expense.localDateTime)})
                         </span>
+                        {expense.haveImage ?
+                            <button className="view-image-button" onClick={() => handleViewImage(expense.id)}>Şəkilə bax</button>
+                            : ''
+                        }
                         <button className="delete-button" onClick={() => handleDeleteExpense(expense.id)}>Sil</button>
                     </li>
                 ))}
