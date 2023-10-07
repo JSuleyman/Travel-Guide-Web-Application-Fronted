@@ -7,6 +7,7 @@ import TotalMoneyExpenseInput from './TotalMoneyExpenseInput';
 import { ToastContainer, toast } from 'react-toastify';
 import ImageGallery from '../../../img/ImageGallery';
 import axios from 'axios';
+import { addSeperateNumber } from '../../../utils/addSeperateNumber';
 // import DateRangeFilter from './DateRangeFilter';
 
 
@@ -212,8 +213,8 @@ function WelcomeWalletManagement({ data }) {
         <div className="wallet-management-welcome">
             <div className="money-info">
                 <TotalMoneyExpenseInput initialTotalMoney={totalMoney} onMoneyLeftChange={handleMoneyLeftChange} />
-                <p>Xərclənən məbləğ: {(totalMoney - moneyLeft).toFixed(2)} ₼</p>
-                <p>Qalan məbləğ: {moneyLeft} ₼</p>
+                <p>Xərclənən məbləğ: {addSeperateNumber(totalMoney - moneyLeft)} ₼</p>
+                <p>Qalan məbləğ: {addSeperateNumber(moneyLeft)} ₼</p>
                 <button className="reset_button" onClick={resetUserWalletWithConfirmation}>Sıfırla</button>
             </div>
             <div className="expense-form">
