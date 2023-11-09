@@ -10,7 +10,7 @@ function WalletManagement() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        makeApiRequest('https://travel-guide-backend-7e73c60545d8.herokuapp.com/wallet_management/is_have_total_money', 'GET')
+        makeApiRequest('https://travel-guide-main-de97df9e068d.herokuapp.com/wallet_management/is_have_total_money', 'GET')
             .then(response => {
                 setData(response.data);
                 setLoading(false);
@@ -62,7 +62,7 @@ export default WalletManagement;
 //     const [showCreateWallet, setShowCreateWallet] = useState(false);
 
 //     useEffect(() => {
-//         makeApiRequest('https://travel-guide-backend-7e73c60545d8.herokuapp.com/wallet_management/is_have_total_money', 'GET')
+//         makeApiRequest('https://travel-guide-main-de97df9e068d.herokuapp.com/wallet_management/is_have_total_money', 'GET')
 //             .then(response => {
 //                 setData(response.data);
 //                 console.log(response.data.haveTotalMoney);

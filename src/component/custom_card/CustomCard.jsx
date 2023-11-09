@@ -18,7 +18,7 @@ const CustomCard = () => {
     const [shouldResetImages, setShouldResetImages] = useState(false);
     const [selectedIcons, setSelectedIcons] = useState([]);
 
-    const apiUrl = 'https://travel-guide-backend-7e73c60545d8.herokuapp.com/travel_place/getAll';
+    const apiUrl = 'https://travel-guide-main-de97df9e068d.herokuapp.com/travel_place/getAll';
 
     useEffect(() => {
         async function fetchKeyOptions() {
@@ -47,7 +47,7 @@ const CustomCard = () => {
         e.preventDefault();
 
         makeApiRequest(
-            'https://travel-guide-backend-7e73c60545d8.herokuapp.com/travel_destination',
+            'https://travel-guide-main-de97df9e068d.herokuapp.com/travel_destination',
             'POST',
             {
                 categoryId,
@@ -70,14 +70,14 @@ const CustomCard = () => {
 
                 const token = localStorage.getItem('token');
 
-                axios.post(`https://travel-guide-backend-7e73c60545d8.herokuapp.com/image/${fkPlacesToVisitId}`, formData, {
+                axios.post(`https://travel-guide-main-de97df9e068d.herokuapp.com/image/${fkPlacesToVisitId}`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         'Authorization': `Bearer ${token}`
                     }
                 })
                     .catch(error => {
-                        makeApiRequest(`https://travel-guide-backend-7e73c60545d8.herokuapp.com/travel_destination/delete/${fkPlacesToVisitId}`, 'DELETE')
+                        makeApiRequest(`https://travel-guide-main-de97df9e068d.herokuapp.com/travel_destination/delete/${fkPlacesToVisitId}`, 'DELETE')
                     });
                 setCategoryId('');
                 setDestinationName('');

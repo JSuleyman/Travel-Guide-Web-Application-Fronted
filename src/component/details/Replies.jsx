@@ -31,7 +31,7 @@ const Replies = ({ commentId, commentReplyCount }) => {
     }, [commentId, offset, limit]);
 
     // const fetchReplyCount = (commentId) => {
-    //     const url = `https://travel-guide-backend-7e73c60545d8.herokuapp.com/user_comment_reply/count/${commentId}`;
+    //     const url = `https://travel-guide-main-de97df9e068d.herokuapp.com/user_comment_reply/count/${commentId}`;
 
     //     makeApiRequest(url, 'GET')
     //         .then(response => {
@@ -51,7 +51,7 @@ const Replies = ({ commentId, commentReplyCount }) => {
     };
 
     const fetchReplyComments = (commentId, offset, limit) => {
-        const url = `https://travel-guide-backend-7e73c60545d8.herokuapp.com/user_comment_reply/${commentId}?page=${offset}&size=${limit}`;
+        const url = `https://travel-guide-main-de97df9e068d.herokuapp.com/user_comment_reply/${commentId}?page=${offset}&size=${limit}`;
 
         makeApiRequest(url, 'GET')
             .then(response => {
@@ -65,7 +65,7 @@ const Replies = ({ commentId, commentReplyCount }) => {
     };
 
     // const fetchCurrentUserId = () => {
-    //     const url = 'https://travel-guide-backend-7e73c60545d8.herokuapp.com/user_comment/current_user_id';
+    //     const url = 'https://travel-guide-main-de97df9e068d.herokuapp.com/user_comment/current_user_id';
 
     //     makeApiRequest(url, 'GET')
     //         .then(response => {
@@ -165,7 +165,7 @@ export default Replies;
 
 
 //     const fetchReplyCount = (commentId) => {
-//         const url = `https://travel-guide-backend-7e73c60545d8.herokuapp.com/user_comment_reply/count/${commentId}`;
+//         const url = `https://travel-guide-main-de97df9e068d.herokuapp.com/user_comment_reply/count/${commentId}`;
 
 //         makeApiRequest(url, 'GET')
 //             .then(response => {
@@ -185,7 +185,7 @@ export default Replies;
 //     };
 
 //     const fetchReplyComments = (commentId) => {
-//         const url = `https://travel-guide-backend-7e73c60545d8.herokuapp.com/user_comment_reply/${commentId}`;
+//         const url = `https://travel-guide-main-de97df9e068d.herokuapp.com/user_comment_reply/${commentId}`;
 
 //         makeApiRequest(url, 'GET')
 //             .then(response => {
@@ -199,7 +199,7 @@ export default Replies;
 //     };
 
 //     const fetchCurrentUserId = () => {
-//         const url = 'https://travel-guide-backend-7e73c60545d8.herokuapp.com/user_comment/current_user_id';
+//         const url = 'https://travel-guide-main-de97df9e068d.herokuapp.com/user_comment/current_user_id';
 
 //         makeApiRequest(url, 'GET')
 //             .then(response => {
@@ -277,7 +277,7 @@ export default Replies;
 //     };
 
 //     const fetchReplyComments = (commentId) => {
-//         const url = `https://travel-guide-backend-7e73c60545d8.herokuapp.com/user_comment_reply/${commentId}`;
+//         const url = `https://travel-guide-main-de97df9e068d.herokuapp.com/user_comment_reply/${commentId}`;
 
 //         makeApiRequest(url, 'GET')
 //             .then(response => {
@@ -291,7 +291,7 @@ export default Replies;
 //     };
 
 //     const fetchCurrentUserId = () => {
-//         const url = 'https://travel-guide-backend-7e73c60545d8.herokuapp.com/user_comment/current_user_id';
+//         const url = 'https://travel-guide-main-de97df9e068d.herokuapp.com/user_comment/current_user_id';
 
 //         makeApiRequest(url, 'GET')
 //             .then(response => {

@@ -34,7 +34,7 @@
 //     useEffect(() => {
 //         $.ajax({
 //             type: "GET",
-//             url: "https://travel-guide-backend-7e73c60545d8.herokuapp.com/travel_place/getAll",
+//             url: "https://travel-guide-main-de97df9e068d.herokuapp.com/travel_place/getAll",
 //             headers: {
 //                 "Authorization": "Bearer " + localStorage.getItem("token")
 //             },
@@ -72,7 +72,7 @@
 //         // Favori durumunu kontrol etmek için backend API'yi çağır
 //         const token = localStorage.getItem("token");
 
-//         fetch(`https://travel-guide-backend-7e73c60545d8.herokuapp.com/star/favorites/check/${rowId}`, {
+//         fetch(`https://travel-guide-main-de97df9e068d.herokuapp.com/star/favorites/check/${rowId}`, {
 //             headers: {
 //                 "Authorization": `Bearer ${token}`
 //             }
@@ -95,7 +95,7 @@
 //         // Favori ekleme API isteği yap
 //         const token = localStorage.getItem("token");
 
-//         fetch("https://travel-guide-backend-7e73c60545d8.herokuapp.com/star/favorites/add", {
+//         fetch("https://travel-guide-main-de97df9e068d.herokuapp.com/star/favorites/add", {
 //             method: "POST",
 //             headers: {
 //                 "Content-Type": "application/json",
@@ -118,7 +118,7 @@
 //         // Favori silme API isteği yap
 //         const token = localStorage.getItem("token");
 
-//         fetch("https://travel-guide-backend-7e73c60545d8.herokuapp.com/star/favorites/delete", {
+//         fetch("https://travel-guide-main-de97df9e068d.herokuapp.com/star/favorites/delete", {
 //             method: "DELETE",
 //             headers: {
 //                 "Content-Type": "application/json",
@@ -141,7 +141,7 @@
 //         // Favori durumunu kontrol etmek için backend API'yi çağır
 //         const token = localStorage.getItem("token");
 
-//         fetch(`https://travel-guide-backend-7e73c60545d8.herokuapp.com/like_btn/check/${rowId}`, {
+//         fetch(`https://travel-guide-main-de97df9e068d.herokuapp.com/like_btn/check/${rowId}`, {
 //             headers: {
 //                 "Authorization": `Bearer ${token}`
 //             }
@@ -162,7 +162,7 @@
 //         // Like ekleme API isteği yap
 //         const token = localStorage.getItem("token");
 
-//         fetch("https://travel-guide-backend-7e73c60545d8.herokuapp.com/like_btn/add", {
+//         fetch("https://travel-guide-main-de97df9e068d.herokuapp.com/like_btn/add", {
 //             method: "POST",
 //             headers: {
 //                 "Content-Type": "application/json",
@@ -188,7 +188,7 @@
 //         const token = localStorage.getItem("token");
 //         const selectedOption = document.getElementById("search-select").value;
 //         // HTTP GET isteği yap
-//         fetch(`https://travel-guide-backend-7e73c60545d8.herokuapp.com/travel_destination/get?key=${selectedOption}`, {
+//         fetch(`https://travel-guide-main-de97df9e068d.herokuapp.com/travel_destination/get?key=${selectedOption}`, {
 //             headers: {
 //                 "Authorization": `Bearer ${token}`
 //             }
@@ -214,7 +214,7 @@
 //         // Delete silme API isteği yap
 //         const token = localStorage.getItem("token");
 
-//         fetch("https://travel-guide-backend-7e73c60545d8.herokuapp.com/like_btn/delete", {
+//         fetch("https://travel-guide-main-de97df9e068d.herokuapp.com/like_btn/delete", {
 //             method: "DELETE",
 //             headers: {
 //                 "Content-Type": "application/json",
@@ -256,7 +256,7 @@
 //                 {results.map((row, index) => (
 //                     <div key={index} className="result-card">
 //                         <div className="result-image">
-//                             <img src={`https://travel-guide-backend-7e73c60545d8.herokuapp.com/image/${row.id}/${row.imageUrl}`} alt={row.destination} />
+//                             <img src={`https://travel-guide-main-de97df9e068d.herokuapp.com/image/${row.id}/${row.imageUrl}`} alt={row.destination} />
 //                         </div>
 //                         <div className="result-details">
 //                             <h5 className="result-city">{row.destination}</h5>
@@ -325,7 +325,7 @@ const SearchComponent = () => {
             const token = localStorage.getItem("token");
 
             // HTTP GET isteği yap
-            fetch(`https://travel-guide-backend-7e73c60545d8.herokuapp.com/travel_destination/get?key=${selectedOption}`, {
+            fetch(`https://travel-guide-main-de97df9e068d.herokuapp.com/travel_destination/get?key=${selectedOption}`, {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }
@@ -337,7 +337,7 @@ const SearchComponent = () => {
                     data.forEach(row => {
                         const cityName = row.destination;
                         const money = row.estimatedCost;
-                        const imageURL = "https://travel-guide-backend-7e73c60545d8.herokuapp.com/image/" + row.id + "/" + row.imageUrl;
+                        const imageURL = "https://travel-guide-main-de97df9e068d.herokuapp.com/image/" + row.id + "/" + row.imageUrl;
                         console.log(imageURL); // Resim URL'sini al
                         const likeCount = row.likeCount;
                         const creadetBy = row.createdByName ? row.createdByName : '';
@@ -471,7 +471,7 @@ const SearchComponent = () => {
     useEffect(() => {
         $.ajax({
             type: "GET",
-            url: "https://travel-guide-backend-7e73c60545d8.herokuapp.com/travel_place/getAll",
+            url: "https://travel-guide-main-de97df9e068d.herokuapp.com/travel_place/getAll",
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token")
             },
@@ -509,7 +509,7 @@ const SearchComponent = () => {
         // Favori durumunu kontrol etmek için backend API'yi çağır
         const token = localStorage.getItem("token");
 
-        fetch(`https://travel-guide-backend-7e73c60545d8.herokuapp.com/star/favorites/check/${rowId}`, {
+        fetch(`https://travel-guide-main-de97df9e068d.herokuapp.com/star/favorites/check/${rowId}`, {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
@@ -530,7 +530,7 @@ const SearchComponent = () => {
         // Favori ekleme API isteği yap
         const token = localStorage.getItem("token");
 
-        fetch("https://travel-guide-backend-7e73c60545d8.herokuapp.com/star/favorites/add", {
+        fetch("https://travel-guide-main-de97df9e068d.herokuapp.com/star/favorites/add", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -552,7 +552,7 @@ const SearchComponent = () => {
         // Favori silme API isteği yap
         const token = localStorage.getItem("token");
 
-        fetch("https://travel-guide-backend-7e73c60545d8.herokuapp.com/star/favorites/delete", {
+        fetch("https://travel-guide-main-de97df9e068d.herokuapp.com/star/favorites/delete", {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -574,7 +574,7 @@ const SearchComponent = () => {
         // Favori durumunu kontrol etmek için backend API'yi çağır
         const token = localStorage.getItem("token");
 
-        fetch(`https://travel-guide-backend-7e73c60545d8.herokuapp.com/like_btn/check/${rowId}`, {
+        fetch(`https://travel-guide-main-de97df9e068d.herokuapp.com/like_btn/check/${rowId}`, {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
@@ -595,7 +595,7 @@ const SearchComponent = () => {
         // Like ekleme API isteği yap
         const token = localStorage.getItem("token");
 
-        fetch("https://travel-guide-backend-7e73c60545d8.herokuapp.com/like_btn/add", {
+        fetch("https://travel-guide-main-de97df9e068d.herokuapp.com/like_btn/add", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -622,7 +622,7 @@ const SearchComponent = () => {
         // Delete silme API isteği yap
         const token = localStorage.getItem("token");
 
-        fetch("https://travel-guide-backend-7e73c60545d8.herokuapp.com/like_btn/delete", {
+        fetch("https://travel-guide-main-de97df9e068d.herokuapp.com/like_btn/delete", {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",

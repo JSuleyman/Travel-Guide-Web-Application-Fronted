@@ -42,7 +42,7 @@ const LoginForm = ({ onLogin }) => {
     const onSubmit = (values) => {
         console.log("submitting...");
         axios
-            .post("https://travel-guide-backend-7e73c60545d8.herokuapp.com/api/v1/auth/authenticate", {
+            .post("https://travel-guide-main-de97df9e068d.herokuapp.com/api/v1/auth/authenticate", {
                 email: values.email,
                 password: values.password,
             })
@@ -254,7 +254,7 @@ export default LoginForm;
 //         onSubmit: (values) => {
 //             console.log("submitting...");
 //             axios
-//                 .post("https://travel-guide-backend-7e73c60545d8.herokuapp.com/api/v1/auth/authenticate", {
+//                 .post("https://travel-guide-main-de97df9e068d.herokuapp.com/api/v1/auth/authenticate", {
 //                     email: values.email,
 //                     password: values.password,
 //                 })

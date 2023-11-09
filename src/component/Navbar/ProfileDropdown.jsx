@@ -13,7 +13,7 @@ const ProfileDropdown = ({ onLogout }) => {
 
   const handleLogout = () => {
     makeApiRequest(
-      "https://travel-guide-backend-7e73c60545d8.herokuapp.com/api/v1/auth/logout",
+      "https://travel-guide-main-de97df9e068d.herokuapp.com/api/v1/auth/logout",
       "POST"
     )
       .then((response) => {
@@ -31,7 +31,7 @@ const ProfileDropdown = ({ onLogout }) => {
   const fetchNotifications = async () => {
     // try {
     //   const response = await makeApiRequest(
-    //     "https://travel-guide-backend-7e73c60545d8.herokuapp.com/notification",
+    //     "https://travel-guide-main-de97df9e068d.herokuapp.com/notification",
     //     "GET"
     //   );
     //   console.log("API isteği tamamlandı:", response.data);
@@ -56,7 +56,7 @@ const ProfileDropdown = ({ onLogout }) => {
   //   setShowNotification((prevState) => {
   //     if (prevState) {
   //       makeApiRequest(
-  //         "https://travel-guide-backend-7e73c60545d8.herokuapp.com/notification",
+  //         "https://travel-guide-main-de97df9e068d.herokuapp.com/notification",
   //         "POST"
   //       )
   //         .then((response) => {
@@ -202,7 +202,7 @@ export default ProfileDropdown;
 
 //   const handleLogout = () => {
 
-//     makeApiRequest('https://travel-guide-backend-7e73c60545d8.herokuapp.com/api/v1/auth/logout', 'POST')
+//     makeApiRequest('https://travel-guide-main-de97df9e068d.herokuapp.com/api/v1/auth/logout', 'POST')
 //       .then(response => {
 //         localStorage.removeItem("token");
 //         localStorage.removeItem("firstName");
@@ -218,7 +218,7 @@ export default ProfileDropdown;
 
 //   useEffect(() => {
 //     const fetchNotifications = async () => {
-//         makeApiRequest('https://travel-guide-backend-7e73c60545d8.herokuapp.com/notification', 'GET')
+//         makeApiRequest('https://travel-guide-main-de97df9e068d.herokuapp.com/notification', 'GET')
 //             .then(response => {
 //                 console.log('API isteği tamamlandı:', response.data);
 //                 setNotifications(response.data);

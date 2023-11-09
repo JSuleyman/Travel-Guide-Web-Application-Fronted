@@ -11,7 +11,7 @@ const QuestionAnswer = () => {
     useEffect(() => {
         // API'den veriyi çek
         makeApiRequest(
-            "https://travel-guide-backend-7e73c60545d8.herokuapp.com/questions_answer",
+            "https://travel-guide-main-de97df9e068d.herokuapp.com/questions_answer",
             "GET"
         )
             .then(response => {

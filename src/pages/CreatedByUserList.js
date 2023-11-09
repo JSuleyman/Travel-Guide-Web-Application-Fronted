@@ -36,7 +36,7 @@ const CreatedByUserList = () => {
 
     useEffect(() => {
         fetchData(filter);
-        makeApiRequest('https://travel-guide-backend-7e73c60545d8.herokuapp.com/travel_destination/created_by_user_list_count', 'GET')
+        makeApiRequest('https://travel-guide-main-de97df9e068d.herokuapp.com/travel_destination/created_by_user_list_count', 'GET')
             .then(response => {
                 console.log('API isteği tamamlandı:', response.data);
                 setPendingCount(response.data.pendingCount == 0 ? 0 : response.data.pendingCount);
@@ -54,7 +54,7 @@ const CreatedByUserList = () => {
         const filterParams = status ? `?status=${status}` : '';
 
         console.log('API isteği yapılıyor...');
-        makeApiRequest(`https://travel-guide-backend-7e73c60545d8.herokuapp.com/travel_destination/created_by_user_list${filterParams}`, 'GET')
+        makeApiRequest(`https://travel-guide-main-de97df9e068d.herokuapp.com/travel_destination/created_by_user_list${filterParams}`, 'GET')
             .then(response => {
                 console.log('API isteği tamamlandı:', response.data);
                 setFavorites(response.data);
@@ -123,7 +123,7 @@ const CreatedByUserList = () => {
                             onClick={() => handleCardClick(row.destinationName, row.id)}
                         >
                             <div className="result-image">
-                                <img src={`https://travel-guide-backend-7e73c60545d8.herokuapp.com/image/${row.id}/${row.imageUrl}`} alt={row.destinationName} />
+                                <img src={`https://travel-guide-main-de97df9e068d.herokuapp.com/image/${row.id}/${row.imageUrl}`} alt={row.destinationName} />
                             </div>
                             <div className="result-details">
                                 <h5 className="result-city">

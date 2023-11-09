@@ -18,7 +18,7 @@ function CreateWalletManagement({ onSubmission }) {
             return;
         }
 
-        makeApiRequest('https://travel-guide-backend-7e73c60545d8.herokuapp.com/wallet_management/total_money', 'POST', { totalMoney })
+        makeApiRequest('https://travel-guide-main-de97df9e068d.herokuapp.com/wallet_management/total_money', 'POST', { totalMoney })
             .then(response => {
                 setTotalMoney('');
                 navigate("/wallet_management");

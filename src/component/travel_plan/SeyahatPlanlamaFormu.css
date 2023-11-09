@@ -1,0 +1,50 @@
+.form-container-soru {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+  }
+  
+  .form-container-soru h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .form-group-soru {
+    margin-bottom: 20px;
+  }
+  
+  .form-label-soru {
+    font-weight: bold;
+  }
+  
+  .form-select-soru {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .form-select-soru:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  .submit-btn-soru {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  .submit-btn-soru:hover {
+    background-color: #0056b3;
+  }
+  

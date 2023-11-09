@@ -30,7 +30,7 @@ const Test = ({ email }) => {
         setRemainingTime(60);
         debugger
         axios
-            .post(`https://travel-guide-backend-7e73c60545d8.herokuapp.com/verify/send_repeat_verification_code?email=${email}`)
+            .post(`https://travel-guide-main-de97df9e068d.herokuapp.com/verify/send_repeat_verification_code?email=${email}`)
             .then(() => {
             })
             .catch((error) => {

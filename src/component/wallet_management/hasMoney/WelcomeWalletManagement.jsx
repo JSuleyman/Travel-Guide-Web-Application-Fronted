@@ -50,12 +50,12 @@ function WelcomeWalletManagement({ data }) {
         setExpenses([...expenses, newExpense]);
 
         console.log("asdad" + newExpense)
-        makeApiRequest("https://travel-guide-backend-7e73c60545d8.herokuapp.com/wallet_management/cost", "POST", newExpense)
+        makeApiRequest("https://travel-guide-main-de97df9e068d.herokuapp.com/wallet_management/cost", "POST", newExpense)
             .then(response => {
                 setExpenseDescription("");
                 setExpenseAmount("");
                 setMoneyLeft(response.data.moneyLeft)
-                makeApiRequest('https://travel-guide-backend-7e73c60545d8.herokuapp.com/wallet_management/cost_list', 'GET')
+                makeApiRequest('https://travel-guide-main-de97df9e068d.herokuapp.com/wallet_management/cost_list', 'GET')
                     .then(response => {
                         setCostList(response.data);
                     })
@@ -76,14 +76,14 @@ function WelcomeWalletManagement({ data }) {
 
                 const token = localStorage.getItem('token');
 
-                axios.post(`https://travel-guide-backend-7e73c60545d8.herokuapp.com/sales_receipt/${expenseId}`, formData, {
+                axios.post(`https://travel-guide-main-de97df9e068d.herokuapp.com/sales_receipt/${expenseId}`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         'Authorization': `Bearer ${token}`
                     }
                 })
                     .catch(error => {
-                        // makeApiRequest(`https://travel-guide-backend-7e73c60545d8.herokuapp.com/travel_destination/delete/${expenseId}`, 'DELETE')
+                        // makeApiRequest(`https://travel-guide-main-de97df9e068d.herokuapp.com/travel_destination/delete/${expenseId}`, 'DELETE')
                     });
                 setSelectedImage([]);
                 setShouldResetImages(true);
@@ -97,7 +97,7 @@ function WelcomeWalletManagement({ data }) {
     };
 
     useEffect(() => {
-        makeApiRequest('https://travel-guide-backend-7e73c60545d8.herokuapp.com/wallet_management/cost_list', 'GET')
+        makeApiRequest('https://travel-guide-main-de97df9e068d.herokuapp.com/wallet_management/cost_list', 'GET')
             .then(response => {
                 setCostList(response.data);
                 console.log(response);
@@ -109,10 +109,10 @@ function WelcomeWalletManagement({ data }) {
     const handleDeleteExpense = (id) => {
         // İlgili gideri listeden kaldırın
 
-        makeApiRequest(`https://travel-guide-backend-7e73c60545d8.herokuapp.com/wallet_management/delete_cost?id=${id}`, "POST")
+        makeApiRequest(`https://travel-guide-main-de97df9e068d.herokuapp.com/wallet_management/delete_cost?id=${id}`, "POST")
             .then(response => {
                 setMoneyLeft(response.data.moneyLeft);
-                makeApiRequest('https://travel-guide-backend-7e73c60545d8.herokuapp.com/wallet_management/cost_list', 'GET')
+                makeApiRequest('https://travel-guide-main-de97df9e068d.herokuapp.com/wallet_management/cost_list', 'GET')
                     .then(response => {
                         setCostList(response.data);
                     })
@@ -130,7 +130,7 @@ function WelcomeWalletManagement({ data }) {
     const resetUserWalletWithConfirmation = () => {
         const confirmation = window.confirm("Cüzdanı sıfırlamak istediğinizden emin misiniz?");
         if (confirmation) {
-            makeApiRequest("https://travel-guide-backend-7e73c60545d8.herokuapp.com/wallet_management/reset_wallet", "DELETE")
+            makeApiRequest("https://travel-guide-main-de97df9e068d.herokuapp.com/wallet_management/reset_wallet", "DELETE")
                 .then(response => {
                     window.location.reload();
                 })
@@ -142,7 +142,7 @@ function WelcomeWalletManagement({ data }) {
 
     // useEffect(() => {
     //     // Valyuta bilgilerini getiren API isteği
-    //     makeApiRequest('https://travel-guide-backend-7e73c60545d8.herokuapp.com/wallet_management/currencies', 'GET')
+    //     makeApiRequest('https://travel-guide-main-de97df9e068d.herokuapp.com/wallet_management/currencies', 'GET')
     //         .then(response => {
     //             // API'den gelen valyuta bilgilerini state'e kaydedin
     //             setCurrencies(response.data);
@@ -164,7 +164,7 @@ function WelcomeWalletManagement({ data }) {
     //     // Örnek olarak, startDate ve endDate'i kullanarak verileri filtreleyebilirsiniz.
     //     setFilteredDates({ startDate, endDate });
 
-    //     makeApiRequest("https://travel-guide-backend-7e73c60545d8.herokuapp.com/wallet_management/date_filter", "GET", { filteredDates })
+    //     makeApiRequest("https://travel-guide-main-de97df9e068d.herokuapp.com/wallet_management/date_filter", "GET", { filteredDates })
     //         .then(response => {
     //             setCostList(response.data);
     //             console.log("Date Filter: " + response.data);
@@ -192,7 +192,7 @@ function WelcomeWalletManagement({ data }) {
                 </head>
                 <body style="text-align:center;">
                     <img 
-                    src="https://travel-guide-backend-7e73c60545d8.herokuapp.com/sales_receipt/${expenseId}" 
+                    src="https://travel-guide-main-de97df9e068d.herokuapp.com/sales_receipt/${expenseId}" 
                     alt="Resim" style="max-width:100%; max-height:100%;" />
                 </body>
             </html>

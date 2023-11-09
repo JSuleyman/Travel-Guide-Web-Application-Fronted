@@ -51,7 +51,7 @@ const RegisterComponent = ({ setAuth }) => {
     const onSubmit = (values) => {
         console.log("submitting...");
         axios
-            .post("https://travel-guide-backend-7e73c60545d8.herokuapp.com/api/v1/auth/register", {
+            .post("https://travel-guide-main-de97df9e068d.herokuapp.com/api/v1/auth/register", {
                 firstname: values.firstName,
                 lastname: values.lastName,
                 email: values.email,

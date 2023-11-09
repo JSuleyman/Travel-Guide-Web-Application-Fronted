@@ -43,7 +43,7 @@ const VerifyComponent = ({ setAuth }) => {
     const onSubmit = (values) => {
         console.log("submitting...");
         axios
-            .post(`https://travel-guide-backend-7e73c60545d8.herokuapp.com/verify?email=${email}&verificationCode=${values.firstName}`)
+            .post(`https://travel-guide-main-de97df9e068d.herokuapp.com/verify?email=${email}&verificationCode=${values.firstName}`)
             .then((response) => {
                 navigate("/");
             })

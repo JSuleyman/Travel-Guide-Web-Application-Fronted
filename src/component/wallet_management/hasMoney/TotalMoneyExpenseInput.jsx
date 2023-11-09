@@ -24,7 +24,7 @@ function TotalMoneyExpenseInput({ initialTotalMoney, onMoneyLeftChange }) {
     const handleSaveClick = () => {
         const confirmation = window.confirm(`Should the total money be determined as: ${newTotalMoney} ₼?`);
         if (confirmation) {
-            makeApiRequest('https://travel-guide-backend-7e73c60545d8.herokuapp.com/wallet_management/change_total_money', 'PUT', { totalMoney: newTotalMoney })
+            makeApiRequest('https://travel-guide-main-de97df9e068d.herokuapp.com/wallet_management/change_total_money', 'PUT', { totalMoney: newTotalMoney })
                 .then(response => {
                     onMoneyLeftChange(response.data.moneyLeft, response.data.totalMoney);
                     setIsEditing(false);

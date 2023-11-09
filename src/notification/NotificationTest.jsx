@@ -6,7 +6,7 @@ const NotificationTest = () => {
 
     // useEffect(() => {
     //     const fetchNotifications = async () => {
-    //         makeApiRequest('https://travel-guide-backend-7e73c60545d8.herokuapp.com/notification', 'GET')
+    //         makeApiRequest('https://travel-guide-main-de97df9e068d.herokuapp.com/notification', 'GET')
     //             .then(response => {
     //                 console.log('API isteği tamamlandı:', response.data);
     //                 setNotifications(response.data);
